@@ -1,14 +1,8 @@
-import { Routes, Route, Link } from "react-router-dom"
-import CarList from "./api/CarList"
+import { ThemeProvider } from "styled-components"
+import theme from "./assets/theme"
 
-function App() {
-  return (
-    <div>
-      <Routes>
-        <Route path="/cars" element={<CarList />} />
-      </Routes>
-    </div>
-  )
+const App = () => {
+  return <ThemeProvider theme={theme}></ThemeProvider>
 }
 
 export default App
