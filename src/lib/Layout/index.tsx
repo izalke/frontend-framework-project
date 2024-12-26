@@ -19,7 +19,7 @@ const Layout: React.FC = () => {
         </main>
 
         <ScrollRestoration />
-        <Footer />
+        {/* <Footer /> */}
       </ThemeProvider>
     </Wrapper>
   )
