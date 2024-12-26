@@ -1,8 +1,8 @@
 import { Outlet, ScrollRestoration } from "react-router-dom"
 import { Wrapper, ProgressBar } from "./layoutElements"
 import Nav from "./components/nav"
-// import Footer from "./components/footer"
-import { motion, useScroll } from "framer-motion"
+import Footer from "./components/footer"
+import { useScroll } from "framer-motion"
 import { ThemeProvider } from "styled-components"
 import theme from "./../../assets/theme"
 
@@ -19,7 +19,7 @@ const Layout: React.FC = () => {
         </main>
 
         <ScrollRestoration />
-        {/* <Footer /> */}
+        <Footer />
       </ThemeProvider>
     </Wrapper>
   )

@@ -123,7 +123,6 @@ export const MobileOverlay = styled(motion.div)`
   height: 100vh;
   position: fixed;
   z-index: 996;
-  background-color: #000;
 `
 
 export const MobileLink = styled(Link)<{ isActive: boolean }>`

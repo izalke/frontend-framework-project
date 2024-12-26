@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { motion } from "framer-motion"
 import { FaLinkedin, FaFacebookSquare, FaYoutube } from "react-icons/fa"
 import logo from "../../../../assets/img/duck-logo.png"
 import {
