@@ -8,7 +8,7 @@ import Layout from "./lib/Layout"
 
 // views
 // import Home from "./views/Home"
-// import NotFound from "./views/NotFound"
+import NotFound from "./views/NotFound"
 // import About from "./views/About"
 // import Market from "./views/Market"
 // import Contact from "./views/Contact"
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
-    // errorElement: <NotFound />,
+    errorElement: <NotFound />,
     children: [
       // {
       //   path: "",
