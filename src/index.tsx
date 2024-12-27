@@ -7,7 +7,7 @@ import "./App.css"
 import Layout from "./lib/Layout"
 
 // views
-// import Home from "./views/Home"
+import Home from "./views/Home"
 import NotFound from "./views/NotFound"
 // import About from "./views/About"
 // import Market from "./views/Market"
@@ -20,10 +20,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <NotFound />,
     children: [
-      // {
-      //   path: "",
-      //   element: <Home />,
-      // },
+      {
+        path: "",
+        element: <Home />,
+      },
       // {
       //   path: "about",
       //   element: <About />,
