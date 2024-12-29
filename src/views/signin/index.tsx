@@ -1,82 +1,53 @@
-import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom" // Importuj useNavigate
-import { signIn, signOutUser } from "../../api/firebase" // Importuj funkcje
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../api/firebase";
 
-const Login: React.FC = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [user, setUser] = useState<any>(null) // Stan użytkownika
-  const navigate = useNavigate()
-  const auth = getAuth()
+const SignIn: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    // Monitorowanie stanu użytkownika
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      if (currentUser) {
-        console.log("logged in!")
-        console.log(`Użytkownik: ${currentUser.email}`)
-        setUser(currentUser)
-      } else {
-        console.log("No user")
-        setUser(null)
-      }
-    })
+  const handleSignin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
 
-    return () => unsubscribe() // Czyszczenie subskrypcji przy odmontowywaniu komponentu
-  }, [auth])
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
     try {
-      await signIn(email, password)
-      navigate("/") // Przekierowanie po zalogowaniu
-    } catch (error) {
-      console.error("Błąd logowania:", error)
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/"); // Przekierowanie po zalogowaniu
+    } catch (err: any) {
+      setError(err.message || "Failed to sign in");
     }
-  }
-
-  const handleLogout = async () => {
-    try {
-      await signOutUser()
-      console.log("Wylogowano")
-      navigate("/") // Opcjonalnie: Przekierowanie na stronę główną po wylogowaniu
-    } catch (error) {
-      console.error("Błąd wylogowania:", error)
-    }
-  }
+  };
 
   return (
     <div>
-      {!user ? (
-        <form onSubmit={handleLogin}>
-          <div>
-            <label>Email:</label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label>Hasło:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <button type="submit">Zaloguj się</button>
-        </form>
-      ) : (
+      <h1>Sign In</h1>
+      <form onSubmit={handleSignin}>
+        {error && <p style={{ color: "red" }}>{error}</p>}
         <div>
-          <p>Witaj, {user.email}</p> {/* Wyświetlanie e-maila użytkownika */}
-          <button onClick={handleLogout}>Wyloguj się</button>{" "}
-          {/* Przycisk wylogowania */}
+          <label>Email:</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-      )}
+        <div>
+          <label>Password:</label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit">Log In</button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Login
+export default SignIn;

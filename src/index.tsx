@@ -1,14 +1,15 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { ThemeProvider } from "styled-components"
-import theme from "./assets/theme"
-import "./App.css"
-import Layout from "./lib/Layout"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
+import theme from "./assets/theme";
+import "./App.css";
+import Layout from "./lib/Layout";
 
 // views
-import Home from "./views/Home"
-import NotFound from "./views/NotFound"
+import Home from "./views/Home";
+import NotFound from "./views/NotFound";
+import SignIn from "./views/SignIn";
 // import About from "./views/About"
 // import Market from "./views/Market"
 // import Contact from "./views/Contact"
@@ -36,9 +37,13 @@ const router = createBrowserRouter([
       //   path: "contact",
       //   element: <Contact />,
       // },
+      {
+        path: "SignIn",
+        element: <SignIn />,
+      },
     ],
   },
-])
+]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -46,4 +51,4 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <RouterProvider router={router} />
     </ThemeProvider>
   </React.StrictMode>
-)
+);

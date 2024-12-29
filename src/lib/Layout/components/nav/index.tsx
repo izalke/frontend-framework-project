@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
-import { FaLinkedin, FaFacebookSquare, FaYoutube } from "react-icons/fa"
-import logo from "../../../../assets/img/duck-logo.png"
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FaLinkedin, FaFacebookSquare, FaYoutube } from "react-icons/fa";
+import logo from "../../../../assets/img/duck-logo.png";
 import {
   Wrapper,
   Bar,
@@ -13,42 +13,42 @@ import {
   MobileLink,
   SocialWrapper,
   MobileOverlay,
-} from "./navElements"
+} from "./navElements";
 
 const Nav = (): JSX.Element => {
-  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)
+  const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
 
   const toggleDrawer = (): void => {
-    setIsDrawerOpen((prev) => !prev)
-  }
+    setIsDrawerOpen((prev) => !prev);
+  };
 
   useEffect(() => {
-    document.body.style.overflow = isDrawerOpen ? "hidden" : "auto"
+    document.body.style.overflow = isDrawerOpen ? "hidden" : "auto";
     return () => {
-      document.body.style.overflow = "auto"
-    }
-  }, [isDrawerOpen])
+      document.body.style.overflow = "auto";
+    };
+  }, [isDrawerOpen]);
 
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
   useEffect(() => {
     if (window.innerWidth <= 1024) {
-      setIsDrawerOpen(false)
+      setIsDrawerOpen(false);
     }
-  }, [pathname])
+  }, [pathname]);
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 1024) {
-        setIsDrawerOpen(false)
+        setIsDrawerOpen(false);
       }
-    }
+    };
 
-    window.addEventListener("resize", handleResize)
+    window.addEventListener("resize", handleResize);
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [])
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <Wrapper>
@@ -72,6 +72,12 @@ const Nav = (): JSX.Element => {
           </li>
           <li>
             <Link to={"/contact"}>Contact</Link>
+          </li>
+          <li>
+            <Link to={"/register"}>Register</Link>
+          </li>
+          <li>
+            <Link to={"/signin"}>Sign in</Link>
           </li>
         </Links>
         <BurgerMenu isActive={isDrawerOpen} onClick={toggleDrawer}>
@@ -99,6 +105,12 @@ const Nav = (): JSX.Element => {
         </MobileLink>
         <MobileLink to={"/contact"} isActive={pathname === "/contact"}>
           Contact
+        </MobileLink>
+        <MobileLink to={"/register"} isActive={pathname === "/register"}>
+          Register
+        </MobileLink>
+        <MobileLink to={"/signin"} isActive={pathname === "/signin"}>
+          Sign in
         </MobileLink>
         <Spacer />
         <SocialWrapper>
@@ -131,7 +143,7 @@ const Nav = (): JSX.Element => {
         transition={{ duration: 0.3 }}
       />
     </Wrapper>
-  )
-}
+  );
+};
 
-export default Nav
+export default Nav;
