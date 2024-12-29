@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../api/firebase";
+import { SigninContainer, FormInput, ErrorMessage } from "./signinElements";
 
 const SignIn: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -22,11 +23,12 @@ const SignIn: React.FC = () => {
   };
 
   return (
-    <div>
+    <SigninContainer>
       <h1>Sign In</h1>
       <form onSubmit={handleSignin}>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <div>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+
+        <FormInput>
           <label>Email:</label>
           <input
             type="email"
@@ -34,8 +36,9 @@ const SignIn: React.FC = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <div>
+        </FormInput>
+
+        <FormInput>
           <label>Password:</label>
           <input
             type="password"
@@ -43,10 +46,11 @@ const SignIn: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
+        </FormInput>
+
         <button type="submit">Log In</button>
       </form>
-    </div>
+    </SigninContainer>
   );
 };
 

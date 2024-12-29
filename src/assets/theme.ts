@@ -10,6 +10,6 @@ const theme = {
   divider:
     "linear-gradient(to right, rgba(200, 200, 200, 0.3) 0%, rgba(200, 200, 200, 1) 50%, rgba(200, 200, 200, 0.3) 100%)",
   shadow: "1px 1px 3px 0px rgba(0, 24, 41, 0.2)",
-}
+};
 
-export default theme
+export default theme;
