@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components"
 import theme from "./assets/theme"
 import "./App.css"
 import Layout from "./lib/Layout"
+import Gallery from "./views/gallery";
 
 // views
 import Home from "./views/Home"
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <Home />,
+      },
+      {
+        path: "gallery",
+        element: <Gallery />,
       },
       // {
       //   path: "about",
