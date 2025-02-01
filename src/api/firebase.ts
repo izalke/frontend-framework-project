@@ -10,14 +10,14 @@ import { getDatabase, ref, get } from "firebase/database"
 
 // Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyD7ani7955scwzBk6FMOAU0d0KWXcjDkT8",
-  authDomain: "car-shop-17548.firebaseapp.com",
-  databaseURL: "https://car-shop-17548-default-rtdb.firebaseio.com",
-  projectId: "car-shop-17548",
-  storageBucket: "car-shop-17548.appspot.com",
-  messagingSenderId: "763251747121",
-  appId: "1:763251747121:web:064a3d4983123e864c6810",
-  measurementId: "G-X1WWPW60WT",
+  apiKey: "...",
+  authDomain: "...",
+  databaseURL: "...",
+  projectId: "...",
+  storageBucket: "...",
+  messagingSenderId: "...",
+  appId: "...",
+  measurementId: "...",
 }
 
 // Initialize Firebase
@@ -60,5 +60,7 @@ onAuthStateChanged(auth, (user) => {
   }
 })
 
+
+
 // index.js
-export { auth, app, analytics, signIn, signOutUser, db, ref, get }
+export { auth, app, analytics, signIn, signOutUser, db, ref, get}

@@ -6,6 +6,8 @@ import theme from "./assets/theme"
 import "./App.css"
 import Layout from "./lib/Layout"
 import Gallery from "./views/gallery";
+import Auctions from "./views/auctions/Auctions";
+import AuctionDetails from "./views/auctions/AuctionDetails";
 
 // views
 import Home from "./views/Home"
@@ -28,6 +30,14 @@ const router = createBrowserRouter([
       {
         path: "gallery",
         element: <Gallery />,
+      },
+      {
+        path: "auctions",
+        element: <Auctions />,
+      },
+      {
+        path: "auctions/:id",
+        element: <AuctionDetails />,
       },
       // {
       //   path: "about",

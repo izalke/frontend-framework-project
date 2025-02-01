@@ -13,9 +13,9 @@ app.logger.setLevel(logging.DEBUG)
 
 CORS(app)
 
-NEXTCLOUD_URL = "https://dysk.chaoxly.eu/remote.php/dav/files/gallery/data"
-NEXTCLOUD_USERNAME = "user"
-NEXTCLOUD_PASSWORD = "password"
+NEXTCLOUD_URL = "..."
+NEXTCLOUD_USERNAME = "..."
+NEXTCLOUD_PASSWORD = "..."
 
 
 @app.route('/api/upload', methods=['POST'])
@@ -51,6 +51,7 @@ def upload_files():
 
     app.logger.info("Files uploaded successfully")
     return jsonify({"message": "Files uploaded successfully", "files": uploaded_files}), 200
+
 
 
 @app.route('/api/files', methods=['GET'])
@@ -97,6 +98,7 @@ def serve_file(filename):
     else:
         app.logger.error(f"Failed to retrieve file: {filename} from Nextcloud")
         return jsonify({"error": "File not found on Nextcloud"}), 404
+
 
 
 if __name__ == '__main__':

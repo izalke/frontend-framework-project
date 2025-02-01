@@ -1,0 +1,36 @@
+.auction-details {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    border-radius: 8px;
+    background: #f9f9f9;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .auction-details h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .auction-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .auction-info p {
+    font-size: 18px;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .auction-info p:last-child {
+    border-bottom: none;
+  }
+  
+  .loading {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 50px;
+  }
+  
