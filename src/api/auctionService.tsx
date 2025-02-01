@@ -6,7 +6,7 @@ interface FilterOptions {
 }
 
 const getAuctions = async (filters: FilterOptions = {}) => { // 👈 Domyślna wartość dla filters
-  console.log("🔥 Pobieranie aukcji z Realtime Database...");
+  console.log("Downloading auction");
 
   const dbRef = ref(db);
   try {
@@ -17,28 +17,28 @@ const getAuctions = async (filters: FilterOptions = {}) => { // 👈 Domyślna w
         ...snapshot.val()[key],
       }));
 
-      // **Filtrowanie aukcji według marki**
+     
       if (filters.brand && typeof filters.brand === "string") {
         auctionsArray = auctionsArray.filter((auction) =>
           auction.brand?.toLowerCase().includes(filters.brand!.toLowerCase())
         );
       }
 
-      console.log("✅ Pobrane aukcje:", auctionsArray);
+      console.log("Downloading auction:", auctionsArray);
       return auctionsArray;
     } else {
-      console.log("❌ Brak danych w Realtime Database");
+      console.log("No data in database");
       return [];
     }
   } catch (error) {
-    console.error("❌ Błąd pobierania aukcji:", error);
+    console.error("Error while loading auction", error);
     return [];
   }
 };
 
 
  const getAuctionById = async (id: string) => {
-  console.log(`🔍 Pobieranie aukcji o ID: ${id}`);
+  console.log(`Downloading auction with id: ${id}`);
   const dbRef = ref(db);
 
   try {
@@ -46,11 +46,11 @@ const getAuctions = async (filters: FilterOptions = {}) => { // 👈 Domyślna w
     if (snapshot.exists()) {
       return { id, ...snapshot.val() };
     } else {
-      console.log("❌ Aukcja nie znaleziona.");
+      console.log("Auction not found.");
       return null;
     }
   } catch (error) {
-    console.error("❌ Błąd pobierania aukcji:", error);
+    console.error("Error while loading auction:", error);
     return null;
   }
 };

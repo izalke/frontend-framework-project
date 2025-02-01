@@ -34,9 +34,9 @@ const signIn = async (email: string, password: string) => {
       email,
       password
     )
-    console.log("Zalogowano:", userCredential.user)
+    console.log("Login:", userCredential.user)
   } catch (error) {
-    console.error("Błąd logowania:", error)
+    console.error("Login error:", error)
   }
 }
 
@@ -44,9 +44,9 @@ const signIn = async (email: string, password: string) => {
 const signOutUser = async () => {
   try {
     await signOut(auth)
-    console.log("Wylogowano")
+    console.log("Logout")
   } catch (error) {
-    console.error("Błąd wylogowania:", error)
+    console.error("Logout error:", error)
   }
 }
 

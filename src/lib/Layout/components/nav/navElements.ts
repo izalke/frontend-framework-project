@@ -13,8 +13,10 @@ export const Bar = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: fixed;
-  z-index: 999;
+  position: absolute; /* Nie będzie się przewijał razem ze stroną */
+  top: 0;
+  left: 0;
+  z-index: 1000;
   background-color: ${({ theme }) => theme.antiflashWhite};
   box-shadow: 1px 1px 3px 0px rgba(${({ theme }) => theme.richBlack}, 0.2);
 
@@ -22,6 +24,8 @@ export const Bar = styled.div`
     padding: 1rem;
   }
 `
+
+
 
 export const Logo = styled.img`
   width: 120px;
