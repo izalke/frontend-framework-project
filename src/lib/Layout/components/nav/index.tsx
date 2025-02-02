@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { FaLinkedin, FaFacebookSquare, FaYoutube } from "react-icons/fa"
 import logo from "../../../../assets/img/duck-logo.png"
-import { useAuth } from "../../../../views/auth/AuthContext";
+import { useAuth } from "../../../../AuthContext";
 import {
   Wrapper,
   Bar,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
 import { getAuctionById, deleteAuction } from "../../api/auctionService"; 
-import { useAuth } from "../../views/auth/AuthContext"; // ✅ Pobranie roli użytkownika
+import { useAuth } from "../../AuthContext"; 
 import Modal from "react-modal";
 import "./AuctionDetails.css";
 
@@ -10,7 +10,7 @@ const API_BASE = "http://localhost:5000/api";
 const AuctionDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate(); 
-  const { user, role } = useAuth(); // ✅ Pobranie użytkownika i roli
+  const { user, role } = useAuth(); 
   const [auction, setAuction] = useState<any | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +30,7 @@ const AuctionDetails: React.FC = () => {
     fetchAuction();
   }, [id]);
 
-  // ✅ Funkcja usuwania aukcji
+  
   const handleDelete = async () => {
     if (!id) return;
 
@@ -82,14 +82,14 @@ const AuctionDetails: React.FC = () => {
         )}
       </div>
 
-      {/* ✅ Pokazuj przycisk usuwania TYLKO jeśli użytkownik jest adminem */}
+    
       {role === "admin" && (
         <button onClick={handleDelete} className="delete-button">
           🗑 Usuń aukcję
         </button>
       )}
 
-      {/* 🔍 Modal ze zdjęciami */}
+     
       <Modal
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
