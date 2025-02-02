@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import img1 from "./../../assets/img/pexels-images/pexels1.jpg";
 
 // Main Container
 export const SigninContainer = styled.div`
@@ -8,25 +9,34 @@ export const SigninContainer = styled.div`
   align-items: center;
   min-height: 100vh;
   padding: 2rem;
-  background-color: ${(props) => props.theme.backgroundLight};
-
-  h1 {
-    font-size: 2rem;
-    color: ${(props) => props.theme.yinmnGreen};
-    margin-bottom: 1rem;
-  }
+  background: url(${img1}) no-repeat center center/cover;
 
   form {
     width: 100%;
     max-width: 400px;
     padding: 2rem;
     background-color: ${(props) => props.theme.antiflashWhite};
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  table {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    border-spacing: 0;
+    padding: 2rem;
+    background-color: ${(props) => props.theme.antiflashWhite};
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+
+    th {
+      font-size: 2rem;
+      color: ${(props) => props.theme.yinmnGreen};
+      padding-bottom: 1rem;
+    }
 
     button {
       background-color: ${(props) => props.theme.yinmnGreen};
@@ -73,12 +83,6 @@ export const FormInput = styled.div`
 // Error Message
 export const ErrorMessage = styled.p`
   color: ${(props) => props.theme.errorRed};
-  font-size: 0.875rem;
-  text-align: center;
-`;
-
-export const SuccessMessage = styled.p`
-  color: ${(props) => props.theme.successGreen};
   font-size: 0.875rem;
   text-align: center;
 `;

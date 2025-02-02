@@ -16,40 +16,52 @@ const SignIn: React.FC = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/"); // Przekierowanie po zalogowaniu
+      navigate("/");
     } catch (err: any) {
-      setError(err.message || "Failed to sign in");
+      setError("Wrong email or password. Try again!");
     }
   };
 
   return (
     <SigninContainer>
-      <h1>Sign In</h1>
-      <form onSubmit={handleSignin}>
-        {error && <ErrorMessage>{error}</ErrorMessage>}
+      <table>
+        <thead>
+          <tr>
+            <th>Sign In</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <form onSubmit={handleSignin}>
+                {error && <ErrorMessage>{error}</ErrorMessage>}
 
-        <FormInput>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </FormInput>
+                <FormInput>
+                  <label>Email:</label>
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                </FormInput>
 
-        <FormInput>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </FormInput>
+                <FormInput>
+                  <label>Password:</label>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                </FormInput>
 
-        <button type="submit">Log In</button>
-      </form>
+                <button type="submit">Log In</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </SigninContainer>
   );
 };

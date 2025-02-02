@@ -1,5 +1,5 @@
-import styled from "styled-components"
-import { motion } from "framer-motion"
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
 export const Wrapper = styled.div`
   width: 100dvw;
@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
       padding: 10px 0 0 0;
     }
   }
-`
+`;
 export const ProgressBar = styled(motion.div)`
   position: fixed;
   top: 0;
@@ -23,4 +23,4 @@ export const ProgressBar = styled(motion.div)`
   background-color: #90b137;
   transform-origin: 0%;
   z-index: 1000;
-`
+`;
