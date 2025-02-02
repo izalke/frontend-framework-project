@@ -7,18 +7,8 @@ import {
   onAuthStateChanged,
 } from "firebase/auth"
 import { getDatabase, ref, get, push, set } from "firebase/database"
+import firebaseConfig from "./firebaseconfig.json"
 
-// Firebase configuration
-const firebaseConfig = {
-  apiKey: "...",
-  authDomain: "...",
-  databaseURL: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "...",
-  measurementId: "...",
-}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig)

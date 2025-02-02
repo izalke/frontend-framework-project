@@ -8,7 +8,7 @@ from xml.etree import ElementTree as ET
 import firebase_admin
 from firebase_admin import db, credentials
 import requests
-
+import config
 app = Flask(__name__)
 
 logging.basicConfig(level=logging.DEBUG)
@@ -16,9 +16,9 @@ app.logger.setLevel(logging.DEBUG)
 
 CORS(app)
 
-NEXTCLOUD_URL = "..."
-NEXTCLOUD_USERNAME = "..."
-NEXTCLOUD_PASSWORD = "..."
+NEXTCLOUD_URL = config.NEXTCLOUD["URL"]
+NEXTCLOUD_USERNAME = config.NEXTCLOUD["USERNAME"]
+NEXTCLOUD_PASSWORD = config.NEXTCLOUD["PASSWORD"]
 
 @app.route('/api/upload-gallery', methods=['POST'])
 def upload_gallery_files():
