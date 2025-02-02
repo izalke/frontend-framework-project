@@ -6,7 +6,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth"
-import { getDatabase, ref, get } from "firebase/database"
+import { getDatabase, ref, get, push, set } from "firebase/database"
 
 // Firebase configuration
 const firebaseConfig = {
@@ -61,6 +61,27 @@ onAuthStateChanged(auth, (user) => {
 })
 
 
+const addAuction = async (auctionData: any) => {
+  try {
+    const newAuctionRef = push(ref(db, "auctions"))
+    await set(newAuctionRef, auctionData)
+    return newAuctionRef.key
+  } catch (error) {
+    console.error("Błąd przy dodawaniu aukcji:", error)
+    return null
+  }
+}
 
-// index.js
-export { auth, app, analytics, signIn, signOutUser, db, ref, get}
+const deleteAuctionFromFirebase = async (auctionId: string) => {
+  try {
+    const auctionRef = ref(db, `auctions/${auctionId}`);
+    await set(auctionRef, null); 
+    console.log(`Aukcja ${auctionId} została usunięta z Firebase.`);
+    return true;
+  } catch (error) {
+    console.error("Błąd podczas usuwania aukcji z Firebase:", error);
+    return false;
+  }
+};
+
+export { auth, app, analytics, signIn, signOutUser, db, ref, get, addAuction, deleteAuctionFromFirebase}

@@ -1,11 +1,12 @@
 import { ref, get, child } from "firebase/database";
-import { db } from "./firebase";
+import { db, addAuction, deleteAuctionFromFirebase} from "./firebase";
+
 
 interface FilterOptions {
   brand?: string;
 }
 
-const getAuctions = async (filters: FilterOptions = {}) => { // 👈 Domyślna wartość dla filters
+const getAuctions = async (filters: FilterOptions = {}) => { 
   console.log("Downloading auction");
 
   const dbRef = ref(db);
@@ -55,4 +56,33 @@ const getAuctions = async (filters: FilterOptions = {}) => { // 👈 Domyślna w
   }
 };
 
-export { getAuctions, getAuctionById };
+const createAuction = async (auctionData: any) => {
+  return await addAuction(auctionData)
+}
+
+const deleteAuction = async (auctionId: string) => {
+  try {
+    
+    const firebaseDeleted = await deleteAuctionFromFirebase(auctionId);
+    if (!firebaseDeleted) throw new Error("Nie udało się usunąć aukcji z Firebase");
+
+    
+    const response = await fetch(`http://localhost:5000/api/delete-auction/${auctionId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      throw new Error("Nie udało się usunąć zdjęć z Nextcloud");
+    }
+
+    console.log(`Aukcja ${auctionId} oraz jej zdjęcia zostały usunięte.`);
+    return true;
+  } catch (error) {
+    console.error("Błąd podczas usuwania aukcji:", error);
+    return false;
+  }
+};
+
+
+
+export { getAuctions, getAuctionById, createAuction, deleteAuction };

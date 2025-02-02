@@ -74,6 +74,9 @@ const Nav = (): JSX.Element => {
             <Link to={"/auctions"}>Auctions</Link>
           </li>
           <li>
+            <Link to={"/addcar"}>Add car</Link>
+          </li>
+          <li>
             <Link to={"/signin"}>Login / Sign in</Link>
           </li>
           <li>

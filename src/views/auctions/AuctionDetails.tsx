@@ -1,30 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { getAuctionById } from "../../api/auctionService";
+import { useParams, useNavigate } from "react-router-dom"; 
+import { getAuctionById, deleteAuction } from "../../api/auctionService"; 
 import Modal from "react-modal";
 import "./AuctionDetails.css";
 
 const API_BASE = "http://localhost:5000/api";
 
-interface AuctionDetailsProps {
-  [key: string]: any;
-}
-
-const fieldLabels: { [key: string]: string } = {
-  brand: "Marka",
-  price: "Cena",
-  title: "Tytuł",
-  capacity: "Pojemność silnika",
-  power: "Moc",
-  mileage: "Przebieg",
-  color: "Kolor",
-  vin: "VIN",
-  description: "Opis"
-};
-
 const AuctionDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [auction, setAuction] = useState<AuctionDetailsProps | null>(null);
+  const navigate = useNavigate(); 
+  const [auction, setAuction] = useState<any | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,50 +28,36 @@ const AuctionDetails: React.FC = () => {
     fetchAuction();
   }, [id]);
 
-  const openModal = (index: number) => {
-    setCurrentIndex(index);
-    setIsOpen(true);
-    document.body.classList.add("modal-active");
-  };
+  const handleDelete = async () => {
+    if (!id) return;
 
-  const closeModal = () => {
-    setIsOpen(false);
-    document.body.classList.remove("modal-active");
-  };
+    const confirmed = window.confirm("Czy na pewno chcesz usunąć tę aukcję?");
+    if (!confirmed) return;
 
-  const nextImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const prevImage = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    const success = await deleteAuction(id);
+    if (success) {
+      alert("Aukcja została usunięta.");
+      navigate("/auctions"); 
+    } else {
+      alert("Błąd podczas usuwania aukcji.");
+    }
   };
 
   if (!auction) return <p className="loading">Ładowanie...</p>;
 
-  
-  const { description, id: _, ...otherDetails } = auction;
-
   return (
     <div className="auction-details">
       <h2>{auction.title || "Brak tytułu"}</h2>
-      
+
       <div className="auction-info">
-        {Object.entries(otherDetails)
+        {Object.entries(auction)
           .filter(([key]) => key !== "id") 
           .map(([key, value]) => (
             <p key={key}>
-              <strong>{fieldLabels[key] || key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {String(value)}
+              <strong>{key}:</strong> {String(value)}
             </p>
-        ))}
+          ))}
       </div>
-
-      {description && (
-        <div className="auction-description">
-          <h3>Opis</h3>
-          <p>{description}</p>
-        </div>
-      )}
 
       <h3>Zdjęcia</h3>
       <div className="auction-images">
@@ -97,7 +68,10 @@ const AuctionDetails: React.FC = () => {
               src={`${API_BASE}/data/${id}/${file}`}
               alt={`Zdjęcie ${index + 1}`}
               className="thumbnail"
-              onClick={() => openModal(index)}
+              onClick={() => {
+                setCurrentIndex(index);
+                setIsOpen(true);
+              }}
             />
           ))
         ) : (
@@ -105,20 +79,21 @@ const AuctionDetails: React.FC = () => {
         )}
       </div>
 
-     
+      <button onClick={handleDelete} className="delete-button">🗑 Usuń aukcję</button> 
+
       <Modal
         isOpen={isOpen}
-        onRequestClose={closeModal}
+        onRequestClose={() => setIsOpen(false)}
         className="modal-content"
         overlayClassName="modal-overlay"
         ariaHideApp={false}
       >
         <div className="modal-navigation">
-          <button className="prev-button" onClick={prevImage}>◀</button>
+          <button onClick={() => setCurrentIndex((currentIndex - 1 + images.length) % images.length)}>◀</button>
           <img className="full-image" src={`${API_BASE}/data/${id}/${images[currentIndex]}`} alt="Powiększone zdjęcie" />
-          <button className="next-button" onClick={nextImage}>▶</button>
+          <button onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}>▶</button>
         </div>
-        <button className="close-button" onClick={closeModal}>Zamknij</button>
+        <button className="close-button" onClick={() => setIsOpen(false)}>Zamknij</button>
       </Modal>
     </div>
   );

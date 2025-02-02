@@ -139,3 +139,22 @@
     align-items: center;
     z-index: 9999; 
 }
+
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s;
+    margin-top: 20px;
+  }
+  
+  .delete-btn:hover {
+    background-color: #c82333;
+  }
+  
