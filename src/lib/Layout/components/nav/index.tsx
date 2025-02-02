@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom"
 import { FaLinkedin, FaFacebookSquare, FaYoutube } from "react-icons/fa"
 import logo from "../../../../assets/img/duck-logo.png"
 import { useAuth } from "../../../../AuthContext";
+import { getTotalUnreadMessages } from "../../../../api/firebase";
 import {
   Wrapper,
   Bar,
@@ -22,7 +23,13 @@ const Nav = (): JSX.Element => {
   const toggleDrawer = (): void => {
     setIsDrawerOpen((prev) => !prev)
   }
-  
+
+  const [unreadCount, setUnreadCount] = useState(0);
+  useEffect(() => {
+    if (user) {
+      getTotalUnreadMessages(user.uid, role === "admin").then(setUnreadCount);
+    }
+  }, [user, role]);
 
   useEffect(() => {
     document.body.style.overflow = isDrawerOpen ? "hidden" : "auto"
@@ -81,6 +88,12 @@ const Nav = (): JSX.Element => {
               <Link to={"/addcar"}>Add Car</Link>
             </li>
           )}
+
+          <li>
+          <Link to="/chat" className="chat-link">
+            Chat {unreadCount > 0 && <span className="notification">{unreadCount}</span>}
+          </Link>
+          </li>
 
 
           {user ? (
