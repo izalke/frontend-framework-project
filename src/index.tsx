@@ -10,6 +10,10 @@ import Auctions from "./views/auctions/Auctions";
 import AuctionDetails from "./views/auctions/AuctionDetails";
 import AddCar from "./views/addcar";
 
+import Auth from "./views/auth";
+import { AuthProvider } from "./AuthContext";
+import ProtectedRoute from "./views/auth/ProtectedRoute";
+
 // views
 import Home from "./views/Home"
 import NotFound from "./views/NotFound"
@@ -42,7 +46,15 @@ const router = createBrowserRouter([
       },
       {
         path: "addcar",
-        element: <AddCar />,
+        element: (
+          <ProtectedRoute>
+            <AddCar />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "auth",
+        element: <Auth />,
       },
       // {
       //   path: "about",
@@ -63,7 +75,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
+    <AuthProvider>
       <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>
 )

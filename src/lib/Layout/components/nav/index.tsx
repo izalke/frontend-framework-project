@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { FaLinkedin, FaFacebookSquare, FaYoutube } from "react-icons/fa"
 import logo from "../../../../assets/img/duck-logo.png"
+import { useAuth } from "../../../../views/auth/AuthContext";
 import {
   Wrapper,
   Bar,
@@ -17,10 +18,11 @@ import {
 
 const Nav = (): JSX.Element => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)
-
+  const { user, role, logout } = useAuth();
   const toggleDrawer = (): void => {
     setIsDrawerOpen((prev) => !prev)
   }
+  
 
   useEffect(() => {
     document.body.style.overflow = isDrawerOpen ? "hidden" : "auto"
@@ -73,12 +75,33 @@ const Nav = (): JSX.Element => {
           <li>
             <Link to={"/auctions"}>Auctions</Link>
           </li>
-          <li>
-            <Link to={"/addcar"}>Add car</Link>
-          </li>
-          <li>
-            <Link to={"/signin"}>Login / Sign in</Link>
-          </li>
+
+          {role === "admin" && (
+            <li>
+              <Link to={"/addcar"}>Add Car</Link>
+            </li>
+          )}
+
+
+          {user ? (
+            <>
+              <li>
+                <span className="username">👤 {user.displayName || user.email}</span>
+              </li>
+              <li>
+                <button onClick={logout} className="logout-button">
+                  Logout
+                </button>
+              </li>
+            </>
+          ) : (
+            <li>
+              <Link to={"/auth"}>Login / Sign in</Link>
+            </li>
+          )}
+
+
+
           <li>
             <Link to={"/contact"}>Contact</Link>
           </li>
