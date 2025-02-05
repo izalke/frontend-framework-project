@@ -128,7 +128,6 @@ const Gallery: React.FC = () => {
         )}
       </GalleryGrid>
 
-      {/* Modal for image preview */}
       {selectedImage && (
         <ModalOverlay onClick={closeImageModal}>
           <ModalContent onClick={(e) => e.stopPropagation()}>

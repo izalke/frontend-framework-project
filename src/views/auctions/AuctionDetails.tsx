@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom"; 
 import { getAuctionById, deleteAuction } from "../../api/auctionService"; 
-import { useAuth } from "../../AuthContext"; 
 import Modal from "react-modal";
 import "./AuctionDetails.css";
 
@@ -10,7 +9,6 @@ const API_BASE = "http://localhost:5000/api";
 const AuctionDetails: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate(); 
-  const { user, role } = useAuth(); 
   const [auction, setAuction] = useState<any | null>(null);
   const [images, setImages] = useState<string[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +28,6 @@ const AuctionDetails: React.FC = () => {
     fetchAuction();
   }, [id]);
 
-  
   const handleDelete = async () => {
     if (!id) return;
 
@@ -59,7 +56,7 @@ const AuctionDetails: React.FC = () => {
             <p key={key}>
               <strong>{key}:</strong> {String(value)}
             </p>
-          ))}
+          ))}    
       </div>
 
       <h3>Zdjęcia</h3>
@@ -82,14 +79,10 @@ const AuctionDetails: React.FC = () => {
         )}
       </div>
 
-    
-      {role === "admin" && (
-        <button onClick={handleDelete} className="delete-button">
-          🗑 Usuń aukcję
-        </button>
-      )}
+      <button onClick={() => navigate(`/update-auction/${id}`)} className="edit-button">✏️ Edytuj aukcję</button> 
 
-     
+      <button onClick={handleDelete} className="delete-button">🗑 Usuń aukcję</button> 
+
       <Modal
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}

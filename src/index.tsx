@@ -13,6 +13,7 @@ import Chat from "./views/chat";
 import Auth from "./views/auth";
 import { AuthProvider } from "./AuthContext";
 import ProtectedRoute from "./views/auth/ProtectedRoute";
+import UpdateAuction from "./views/auctions/UpdateAuction"
 
 // views
 import Home from "./views/Home"
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "auctions/:id",
         element: <AuctionDetails />,
+      },
+      {
+        path: "update-auction/:id",
+        element: <UpdateAuction />,
       },
       {
         path: "addcar",

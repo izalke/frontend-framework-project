@@ -1,4 +1,4 @@
-import { ref, get, child } from "firebase/database";
+import { ref, get, child, update } from "firebase/database";
 import { db, addAuction, deleteAuctionFromFirebase} from "./firebase";
 
 
@@ -64,7 +64,7 @@ const deleteAuction = async (auctionId: string) => {
   try {
     
     const firebaseDeleted = await deleteAuctionFromFirebase(auctionId);
-    if (!firebaseDeleted) throw new Error("Nie udało się usunąć aukcji z Firebase");
+    if (!firebaseDeleted) throw new Error("Error while deleting auction from firebase");
 
     
     const response = await fetch(`http://localhost:5000/api/delete-auction/${auctionId}`, {
@@ -72,17 +72,30 @@ const deleteAuction = async (auctionId: string) => {
     });
 
     if (!response.ok) {
-      throw new Error("Nie udało się usunąć zdjęć z Nextcloud");
+      throw new Error("Error while deleting photo from nextcloud");
     }
 
-    console.log(`Aukcja ${auctionId} oraz jej zdjęcia zostały usunięte.`);
+    console.log(`Auction ${auctionId} with photo was deleted.`);
     return true;
   } catch (error) {
-    console.error("Błąd podczas usuwania aukcji:", error);
+    console.error("Error while deleting auction:", error);
+    return false;
+  }
+};
+
+const updateAuction = async (auctionId: string, updatedData: any): Promise<boolean> => {
+  try {
+    const auctionRef = ref(db, `auctions/${auctionId}`);
+
+    await update(auctionRef, updatedData);
+
+    console.log(`Auction ${auctionId} has been updated.`);
+    return true;
+  } catch (error) {
+    console.error("Error while updating auction:", error);
     return false;
   }
 };
 
 
-
-export { getAuctions, getAuctionById, createAuction, deleteAuction };
+export { getAuctions, getAuctionById, createAuction, deleteAuction, updateAuction };

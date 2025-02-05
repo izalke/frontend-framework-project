@@ -10,7 +10,7 @@ const Filters: React.FC<FiltersProps> = ({ setFilters, setSortOption }) => {
   const [sort, setSort] = useState("");
 
   const handleFilterChange = () => {
-    setFilters({ brand: brand || undefined }); // Zapewnia, że brand nigdy nie jest ""
+    setFilters({ brand: brand || undefined }); 
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {

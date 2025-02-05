@@ -2,13 +2,13 @@
     max-width: 600px;
     margin: 40px auto;
     padding: 20px;
-    padding-top: 5vh; 
+    padding-top: 5vh;
     border-radius: 8px;
     background: #f9f9f9;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    position: relative; 
+    position: relative;
+    text-align: center;
 }
-
 
 .auction-info p {
     font-size: 18px;
@@ -36,7 +36,6 @@
     transform: scale(1.05);
 }
 
-
 .modal-active body {
     overflow: hidden;
 }
@@ -46,7 +45,6 @@
 .modal-active .footer {
     display: none;
 }
-
 
 .modal-overlay {
     position: fixed;
@@ -58,6 +56,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 9999;
 }
 
 .modal-content {
@@ -67,6 +66,7 @@
     text-align: center;
     position: relative;
     max-width: 90%;
+    max-height: 90%;
 }
 
 .full-image {
@@ -75,43 +75,56 @@
     border-radius: 8px;
 }
 
-
 .close-button {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px;
+    top: 15px;
+    right: 15px;
+    padding: 8px 12px;
     border: none;
     background: #ff5b5b;
     color: white;
-    font-size: 16px;
+    font-size: 14px;
     cursor: pointer;
     border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
 }
 
 .close-button:hover {
     background: #d94444;
 }
 
-
-.prev-button, .next-button {
+.prev-button,
+.next-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    padding: 15px;
+    padding: 12px;
     background: rgba(0, 0, 0, 0.5);
     color: white;
     border: none;
-    font-size: 20px;
+    font-size: 24px;
     cursor: pointer;
     border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
 }
 
-.prev-button { left: 10px; }
-.next-button { right: 10px; }
+.prev-button {
+    left: 15px;
+}
 
-.prev-button:hover, .next-button:hover {
-    background: rgba(0, 0, 0, 0.8);
+.next-button {
+    right: 15px;
+}
+
+.prev-button:hover,
+.next-button:hover {
+    background: rgba(0, 0, 0, 0.9);
 }
 
 
@@ -127,20 +140,6 @@
 }
 
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; 
-}
-
-
 .delete-btn {
     background-color: #dc3545;
     color: white;
@@ -152,9 +151,54 @@
     font-weight: bold;
     transition: background 0.3s;
     margin-top: 20px;
-  }
-  
-  .delete-btn:hover {
+}
+
+.delete-btn:hover {
     background-color: #c82333;
-  }
-  
+}
+
+
+.edit-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.edit-button:hover {
+    background: #0056b3;
+}
+
+
+
+.edit-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fbbf24; 
+    color: #333;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    width: auto; 
+    margin: 10px auto; 
+    gap: 8px;
+}
+
+
+.edit-button i {
+    font-size: 18px;
+}
+
+
+.edit-button:hover {
+    background: #f59e0b; 
+}
