@@ -1,8 +1,8 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const GalleryContainer = styled.div`
   padding: 20px;
-`;
+`
 
 export const GalleryHeader = styled.div`
   text-align: center;
@@ -17,7 +17,7 @@ export const GalleryHeader = styled.div`
     font-size: 1rem;
     color: #666;
   }
-`;
+`
 
 export const GalleryForm = styled.form`
   text-align: center;
@@ -43,13 +43,13 @@ export const GalleryForm = styled.form`
       cursor: not-allowed;
     }
   }
-`;
+`
 
 export const GalleryGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-`;
+`
 
 export const GalleryItem = styled.div`
   img {
@@ -58,7 +58,7 @@ export const GalleryItem = styled.div`
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
-`;
+`
 
 // Modal Styles
 export const ModalOverlay = styled.div`
@@ -72,7 +72,7 @@ export const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 9999;
-`;
+`
 
 export const ModalContent = styled.div`
   position: relative;
@@ -81,14 +81,14 @@ export const ModalContent = styled.div`
   background-color: white;
   padding: 20px;
   text-align: center;
-`;
+`
 
 export const ModalImage = styled.img`
   width: 100%;
   max-height: 80vh;
   object-fit: contain;
   margin-bottom: 20px;
-`;
+`
 
 export const ModalButton = styled.button`
   position: absolute;
@@ -108,12 +108,12 @@ export const ModalButton = styled.button`
   &:hover {
     opacity: 0.7;
   }
-`;
+`
 
 export const PrevButton = styled(ModalButton)`
   left: 10px;
-`;
+`
 
 export const NextButton = styled(ModalButton)`
   right: 10px;
-`;
+`

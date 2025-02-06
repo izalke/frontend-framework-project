@@ -1,52 +1,51 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom"; 
-import { getAuctionById, deleteAuction } from "../../api/auctionService"; 
-import { useAuth } from "../../AuthContext"; 
-import Modal from "react-modal";
-import "./AuctionDetails.css";
+import React, { useEffect, useState } from "react"
+import { useParams, useNavigate } from "react-router-dom"
+import { getAuctionById, deleteAuction } from "../../api/auctionService"
+import { useAuth } from "../../AuthContext"
+import Modal from "react-modal"
+import "./AuctionDetails.css"
 
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "http://localhost:5000/api"
 
 const AuctionDetails: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate(); 
-  const { user, role } = useAuth(); 
-  const [auction, setAuction] = useState<any | null>(null);
-  const [images, setImages] = useState<string[]>([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const { id } = useParams<{ id: string }>()
+  const navigate = useNavigate()
+  const { user, role } = useAuth()
+  const [auction, setAuction] = useState<any | null>(null)
+  const [images, setImages] = useState<string[]>([])
+  const [isOpen, setIsOpen] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState(0)
 
   useEffect(() => {
     async function fetchAuction() {
       if (id) {
-        const data = await getAuctionById(id);
-        setAuction(data);
+        const data = await getAuctionById(id)
+        setAuction(data)
 
-        const response = await fetch(`${API_BASE}/get-files/${id}`);
-        const imageData = await response.json();
-        setImages(imageData.files);
+        const response = await fetch(`${API_BASE}/get-files/${id}`)
+        const imageData = await response.json()
+        setImages(imageData.files)
       }
     }
-    fetchAuction();
-  }, [id]);
+    fetchAuction()
+  }, [id])
 
-  
   const handleDelete = async () => {
-    if (!id) return;
+    if (!id) return
 
-    const confirmed = window.confirm("Czy na pewno chcesz usunąć tę aukcję?");
-    if (!confirmed) return;
+    const confirmed = window.confirm("Czy na pewno chcesz usunąć tę aukcję?")
+    if (!confirmed) return
 
-    const success = await deleteAuction(id);
+    const success = await deleteAuction(id)
     if (success) {
-      alert("Aukcja została usunięta.");
-      navigate("/auctions"); 
+      alert("Aukcja została usunięta.")
+      navigate("/auctions")
     } else {
-      alert("Błąd podczas usuwania aukcji.");
+      alert("Błąd podczas usuwania aukcji.")
     }
-  };
+  }
 
-  if (!auction) return <p className="loading">Ładowanie...</p>;
+  if (!auction) return <p className="loading">Ładowanie...</p>
 
   return (
     <div className="auction-details">
@@ -54,7 +53,7 @@ const AuctionDetails: React.FC = () => {
 
       <div className="auction-info">
         {Object.entries(auction)
-          .filter(([key]) => key !== "id") 
+          .filter(([key]) => key !== "id")
           .map(([key, value]) => (
             <p key={key}>
               <strong>{key}:</strong> {String(value)}
@@ -72,8 +71,8 @@ const AuctionDetails: React.FC = () => {
               alt={`Zdjęcie ${index + 1}`}
               className="thumbnail"
               onClick={() => {
-                setCurrentIndex(index);
-                setIsOpen(true);
+                setCurrentIndex(index)
+                setIsOpen(true)
               }}
             />
           ))
@@ -82,14 +81,12 @@ const AuctionDetails: React.FC = () => {
         )}
       </div>
 
-    
       {role === "admin" && (
         <button onClick={handleDelete} className="delete-button">
           🗑 Usuń aukcję
         </button>
       )}
 
-     
       <Modal
         isOpen={isOpen}
         onRequestClose={() => setIsOpen(false)}
@@ -98,14 +95,32 @@ const AuctionDetails: React.FC = () => {
         ariaHideApp={false}
       >
         <div className="modal-navigation">
-          <button onClick={() => setCurrentIndex((currentIndex - 1 + images.length) % images.length)}>◀</button>
-          <img className="full-image" src={`${API_BASE}/data/${id}/${images[currentIndex]}`} alt="Powiększone zdjęcie" />
-          <button onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}>▶</button>
+          <button
+            onClick={() =>
+              setCurrentIndex(
+                (currentIndex - 1 + images.length) % images.length
+              )
+            }
+          >
+            ◀
+          </button>
+          <img
+            className="full-image"
+            src={`${API_BASE}/data/${id}/${images[currentIndex]}`}
+            alt="Powiększone zdjęcie"
+          />
+          <button
+            onClick={() => setCurrentIndex((currentIndex + 1) % images.length)}
+          >
+            ▶
+          </button>
         </div>
-        <button className="close-button" onClick={() => setIsOpen(false)}>Zamknij</button>
+        <button className="close-button" onClick={() => setIsOpen(false)}>
+          Zamknij
+        </button>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default AuctionDetails;
+export default AuctionDetails

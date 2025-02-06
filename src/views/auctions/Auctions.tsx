@@ -1,50 +1,47 @@
-import React, { useState, useEffect } from "react";
-import { AuctionList } from "./AuctionList";
-import { getAuctions } from "../../api/auctionService";
-import "./Auctions.css";
+import React, { useState, useEffect } from "react"
+import { AuctionList } from "./AuctionList"
+import { getAuctions } from "../../api/auctionService"
+import "./Auctions.css"
 
 interface Auction {
-  id: string;
-  title?: string;
-  price?: number;
-  brand?: string;
+  id: string
+  title?: string
+  price?: number
+  brand?: string
 }
 
 const Auctions = () => {
-  const [auctions, setAuctions] = useState<Auction[]>([]);
-  const [filters, setFilters] = useState<{ brand?: string; title?: string }>({});
-  const [sortOption, setSortOption] = useState<string>("");
+  const [auctions, setAuctions] = useState<Auction[]>([])
+  const [filters, setFilters] = useState<{ brand?: string; title?: string }>({})
+  const [sortOption, setSortOption] = useState<string>("")
 
   useEffect(() => {
     async function fetchData() {
-      let data = await getAuctions(filters);
+      let data = await getAuctions(filters)
 
-     
       if (filters.brand) {
         data = data.filter((auction) =>
           auction.brand?.toLowerCase().includes(filters.brand!.toLowerCase())
-        );
+        )
       }
 
-      
       if (filters.title) {
         data = data.filter((auction) =>
           auction.title?.toLowerCase().includes(filters.title!.toLowerCase())
-        );
+        )
       }
 
-     
       if (sortOption === "asc") {
-        data.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+        data.sort((a, b) => (a.price ?? 0) - (b.price ?? 0))
       } else if (sortOption === "desc") {
-        data.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+        data.sort((a, b) => (b.price ?? 0) - (a.price ?? 0))
       }
 
-      setAuctions(data);
+      setAuctions(data)
     }
 
-    fetchData();
-  }, [filters, sortOption]);
+    fetchData()
+  }, [filters, sortOption])
 
   return (
     <div className="auctions-page">
@@ -71,7 +68,7 @@ const Auctions = () => {
 
       <AuctionList auctions={auctions} />
     </div>
-  );
-};
+  )
+}
 
-export default Auctions;
+export default Auctions

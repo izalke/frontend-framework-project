@@ -1,22 +1,22 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 
 interface FiltersProps {
-  setFilters: (filters: { brand?: string }) => void;
-  setSortOption: (sort: string) => void;
+  setFilters: (filters: { brand?: string }) => void
+  setSortOption: (sort: string) => void
 }
 
 const Filters: React.FC<FiltersProps> = ({ setFilters, setSortOption }) => {
-  const [brand, setBrand] = useState("");
-  const [sort, setSort] = useState("");
+  const [brand, setBrand] = useState("")
+  const [sort, setSort] = useState("")
 
   const handleFilterChange = () => {
-    setFilters({ brand: brand || undefined }); // Zapewnia, że brand nigdy nie jest ""
-  };
+    setFilters({ brand: brand || undefined }) // Zapewnia, że brand nigdy nie jest ""
+  }
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSort(event.target.value);
-    setSortOption(event.target.value);
-  };
+    setSort(event.target.value)
+    setSortOption(event.target.value)
+  }
 
   return (
     <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
@@ -36,7 +36,7 @@ const Filters: React.FC<FiltersProps> = ({ setFilters, setSortOption }) => {
         <option value="desc">Cena malejąco</option>
       </select>
     </div>
-  );
-};
+  )
+}
 
-export { Filters };
+export { Filters }

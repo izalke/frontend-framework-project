@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { signIn, registerUser } from "../../api/firebase";
-import { useNavigate } from "react-router-dom";
-import "./index.css";
+import React, { useState } from "react"
+import { signIn, registerUser } from "../../api/firebase"
+import { useNavigate } from "react-router-dom"
+import "./index.css"
 
 const Auth: React.FC = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isRegister, setIsRegister] = useState(false);
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [isRegister, setIsRegister] = useState(false)
+  const [error, setError] = useState("")
+  const navigate = useNavigate()
 
   const handleAuth = async () => {
     try {
-      setError("");
+      setError("")
       if (isRegister) {
-        await registerUser(email, password);
+        await registerUser(email, password)
       } else {
-        await signIn(email, password);
+        await signIn(email, password)
       }
-      navigate("/"); 
+      navigate("/")
     } catch (err) {
-      setError("Błąd logowania: " + (err as Error).message);
+      setError("Błąd logowania: " + (err as Error).message)
     }
-  };
+  }
 
   return (
     <div className="auth-container">
@@ -44,10 +44,12 @@ const Auth: React.FC = () => {
         {isRegister ? "Zarejestruj" : "Zaloguj"}
       </button>
       <p onClick={() => setIsRegister(!isRegister)}>
-        {isRegister ? "Masz już konto? Zaloguj się" : "Nie masz konta? Zarejestruj się"}
+        {isRegister
+          ? "Masz już konto? Zaloguj się"
+          : "Nie masz konta? Zarejestruj się"}
       </p>
     </div>
-  );
-};
+  )
+}
 
-export default Auth;
+export default Auth

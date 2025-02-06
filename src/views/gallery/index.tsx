@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import React, { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 import {
   GalleryContainer,
   GalleryHeader,
@@ -11,90 +11,97 @@ import {
   ModalImage,
   PrevButton,
   NextButton,
-} from "./galleryElements";
+} from "./galleryElements"
 
 // Framer Motion Variants
 const headerVariants = {
   hidden: { opacity: 0, scale: 0.8 },
   visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } },
-};
+}
 
 const Gallery: React.FC = () => {
-  const [files, setFiles] = useState<string[]>([]);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(null);
+  const [files, setFiles] = useState<string[]>([])
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [selectedImage, setSelectedImage] = useState<string | null>(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
+    null
+  )
 
   useEffect(() => {
     fetch("http://localhost:5000/api/files")
       .then((response) => response.json())
       .then((data) => setFiles(data.files))
-      .catch((error) => console.error("Error fetching files:", error));
-  }, []);
+      .catch((error) => console.error("Error fetching files:", error))
+  }, [])
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      setSelectedFile(event.target.files[0]);
+      setSelectedFile(event.target.files[0])
     }
-  };
+  }
 
   const handleFileUpload = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
 
     if (selectedFile) {
-      const formData = new FormData();
-      formData.append("file", selectedFile);
+      const formData = new FormData()
+      formData.append("file", selectedFile)
 
       try {
         const response = await fetch("http://localhost:5000/api/upload", {
           method: "POST",
           body: formData,
-        });
+        })
 
         if (response.ok) {
-          const data = await response.json();
-          console.log("Files uploaded successfully:", data);
-          setFiles((prevFiles) => [...prevFiles, ...data.files]);
-          setSelectedFile(null);
+          const data = await response.json()
+          console.log("Files uploaded successfully:", data)
+          setFiles((prevFiles) => [...prevFiles, ...data.files])
+          setSelectedFile(null)
         } else {
-          console.error("Failed to upload file");
+          console.error("Failed to upload file")
         }
       } catch (error) {
-        console.error("Error uploading file:", error);
+        console.error("Error uploading file:", error)
       }
     }
-  };
+  }
 
   const openImageModal = (file: string) => {
-    const index = files.indexOf(file);
-    setSelectedImage(file);
-    setCurrentImageIndex(index);
-  };
+    const index = files.indexOf(file)
+    setSelectedImage(file)
+    setCurrentImageIndex(index)
+  }
 
   const closeImageModal = () => {
-    setSelectedImage(null);
-    setCurrentImageIndex(null);
-  };
+    setSelectedImage(null)
+    setCurrentImageIndex(null)
+  }
 
   const nextImage = () => {
     if (currentImageIndex !== null) {
-      const nextIndex = (currentImageIndex + 1) % files.length;
-      setCurrentImageIndex(nextIndex);
-      setSelectedImage(files[nextIndex]);
+      const nextIndex = (currentImageIndex + 1) % files.length
+      setCurrentImageIndex(nextIndex)
+      setSelectedImage(files[nextIndex])
     }
-  };
+  }
 
   const prevImage = () => {
     if (currentImageIndex !== null) {
-      const prevIndex = (currentImageIndex - 1 + files.length) % files.length;
-      setCurrentImageIndex(prevIndex);
-      setSelectedImage(files[prevIndex]);
+      const prevIndex = (currentImageIndex - 1 + files.length) % files.length
+      setCurrentImageIndex(prevIndex)
+      setSelectedImage(files[prevIndex])
     }
-  };
+  }
 
   return (
     <GalleryContainer>
-      <GalleryHeader as={motion.div} initial="hidden" animate="visible" variants={headerVariants}>
+      <GalleryHeader
+        as={motion.div}
+        initial="hidden"
+        animate="visible"
+        variants={headerVariants}
+      >
         <h2>Gallery</h2>
         <p>Browse and upload your favorite images to share with others.</p>
       </GalleryHeader>
@@ -131,15 +138,22 @@ const Gallery: React.FC = () => {
       {/* Modal for image preview */}
       {selectedImage && (
         <ModalOverlay onClick={closeImageModal}>
-          <ModalContent onClick={(e) => e.stopPropagation()}>
+          <ModalContent
+            onClick={(e: { stopPropagation: () => void }) =>
+              e.stopPropagation()
+            }
+          >
             <PrevButton onClick={prevImage}>&#8592;</PrevButton>
-            <ModalImage src={`http://localhost:5000/data/${selectedImage}`} alt={selectedImage} />
+            <ModalImage
+              src={`http://localhost:5000/data/${selectedImage}`}
+              alt={selectedImage}
+            />
             <NextButton onClick={nextImage}>&#8594;</NextButton>
           </ModalContent>
         </ModalOverlay>
       )}
     </GalleryContainer>
-  );
-};
+  )
+}
 
-export default Gallery;
+export default Gallery
