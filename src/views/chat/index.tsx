@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { sendMessage, listenForMessages, getUnreadMessagesCount } from "../../api/firebase";
+import {
+  sendMessage,
+  listenForMessages,
+  getUnreadMessagesCount,
+} from "../../api/firebase";
 import { getDatabase, ref, get, set, onValue } from "firebase/database";
 import { useAuth } from "../../AuthContext";
 import { db } from "../../api/firebase";
@@ -10,13 +14,14 @@ const Chat: React.FC = () => {
   const [selectedUser, setSelectedUser] = useState<string | null>(
     role === "admin" ? null : user?.uid || null
   );
-  const [users, setUsers] = useState<{ uid: string; email: string; unreadCount: number }[]>([]);
+  const [users, setUsers] = useState<
+    { uid: string; email: string; unreadCount: number }[]
+  >([]);
   const [messages, setMessages] = useState<
     { id: string; sender: string; text: string; timestamp: number }[]
   >([]);
   const [newMessage, setNewMessage] = useState("");
 
-  
   useEffect(() => {
     if (role !== "admin") return;
 
@@ -35,8 +40,7 @@ const Chat: React.FC = () => {
             };
           })
         );
-        
-       
+
         usersArray.sort((a, b) => b.unreadCount - a.unreadCount);
         setUsers(usersArray);
       }
@@ -63,7 +67,7 @@ const Chat: React.FC = () => {
   useEffect(() => {
     if (selectedUser) {
       const unreadRef = ref(db, `chats/${selectedUser}/unread`);
-      set(unreadRef, 0); 
+      set(unreadRef, 0);
     }
   }, [selectedUser]);
 
@@ -89,7 +93,8 @@ const Chat: React.FC = () => {
             <option value="">Wybierz...</option>
             {users.map((u) => (
               <option key={u.uid} value={u.uid}>
-                {u.email} {u.unreadCount > 0 && `(${u.unreadCount} nieprzeczytanych)`}
+                {u.email}{" "}
+                {u.unreadCount > 0 && `(${u.unreadCount} nieprzeczytanych)`}
               </option>
             ))}
           </select>
@@ -102,7 +107,9 @@ const Chat: React.FC = () => {
           return (
             <div
               key={msg.id}
-              className={`message ${isCurrentUser ? "my-message" : "other-message"}`}
+              className={`message ${
+                isCurrentUser ? "my-message" : "other-message"
+              }`}
             >
               <span className="sender">
                 {isCurrentUser

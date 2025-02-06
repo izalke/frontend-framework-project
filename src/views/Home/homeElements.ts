@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes } from "styled-components";
 
 // Header Section
 export const Header = styled.div`
@@ -10,7 +10,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const TextBox = styled.div`
   position: relative;
@@ -27,7 +27,7 @@ export const TextBox = styled.div`
     color: ${(props) => props.theme.antiflashWhite};
     font-size: 1rem;
   }
-`
+`;
 
 export const HeaderContent = styled.div`
   margin-bottom: 40px;
@@ -70,7 +70,7 @@ export const HeaderContent = styled.div`
       font-size: 0.8rem;
     }
   }
-`
+`;
 
 const bounce = keyframes`
   0%, 20%, 50%, 80%, 100% {
@@ -82,7 +82,7 @@ const bounce = keyframes`
   60% {
     transform: translateY(5px) rotate(45deg);
   }
-`
+`;
 
 export const ScrollIndicator = styled.div`
   position: absolute;
@@ -92,7 +92,7 @@ export const ScrollIndicator = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
+`;
 
 export const Arrow = styled.span`
   width: 20px;
@@ -112,7 +112,7 @@ export const Arrow = styled.span`
   &:nth-child(3) {
     animation-delay: 0.4s;
   }
-`
+`;
 
 // Services Section
 
@@ -139,7 +139,7 @@ export const ServicesSection = styled.section`
     margin-right: auto;
     padding-top: 1rem;
   }
-`
+`;
 
 export const Services = styled.div`
   display: flex;
@@ -156,7 +156,7 @@ export const Services = styled.div`
   @media (max-width: 480px) {
     gap: 1rem;
   }
-`
+`;
 
 export const ServiceItem = styled.div`
   display: flex;
@@ -191,4 +191,4 @@ export const ServiceItem = styled.div`
     color: #666;
     font-weight: 400;
   }
-`
+`;
