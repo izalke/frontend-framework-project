@@ -1,157 +1,108 @@
-import React, { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import React, { useState } from "react"
+import { AnimatePresence } from "framer-motion"
+
 import {
   GalleryContainer,
-  GalleryHeader,
-  GalleryForm,
-  GalleryGrid,
-  GalleryItem,
-  ModalOverlay,
+  GalleryHeading,
+  GalleryDescription,
+  ImageGrid,
+  ImageWrapper,
+  ImageOverlay,
+  Modal,
   ModalContent,
-  ModalImage,
-  PrevButton,
-  NextButton,
+  CloseButton,
 } from "./galleryElements"
 
-// Framer Motion Variants
-const headerVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } },
-}
+import img1 from "../../assets/img/pexels-images/pexels1.jpg"
+import img2 from "../../assets/img/pexels-images/pexels2.jpg"
+import img3 from "../../assets/img/pexels-images/pexels3.jpg"
+import img4 from "../../assets/img/pexels-images/pexels4.jpg"
+import img5 from "../../assets/img/pexels-images/pexels5.jpg"
+import img6 from "../../assets/img/pexels-images/pexels6.jpg"
+import img7 from "../../assets/img/pexels-images/pexels7.jpg"
+import img8 from "../../assets/img/pexels-images/pexels8.jpg"
+import img9 from "../../assets/img/pexels-images/pexels9.jpg"
+import img10 from "../../assets/img/pexels-images/pexels10.jpg"
+import img11 from "../../assets/img/pexels-images/pexels11.jpg"
+import img12 from "../../assets/img/pexels-images/pexels12.jpg"
+import img13 from "../../assets/img/pexels-images/pexels13.jpg"
+import img14 from "../../assets/img/pexels-images/pexels14.jpg"
+import img16 from "../../assets/img/pexels-images/pexels2.jpg"
+import img17 from "../../assets/img/pexels-images/pexels9.jpg"
+
+const images = [
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img8,
+  img9,
+  img10,
+  img11,
+  img12,
+  img13,
+  img14,
+  img16,
+  img17,
+]
 
 const Gallery: React.FC = () => {
-  const [files, setFiles] = useState<string[]>([])
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [currentImageIndex, setCurrentImageIndex] = useState<number | null>(
-    null
-  )
-
-  useEffect(() => {
-    fetch("http://localhost:5000/api/files")
-      .then((response) => response.json())
-      .then((data) => setFiles(data.files))
-      .catch((error) => console.error("Error fetching files:", error))
-  }, [])
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      setSelectedFile(event.target.files[0])
-    }
-  }
-
-  const handleFileUpload = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
-
-    if (selectedFile) {
-      const formData = new FormData()
-      formData.append("file", selectedFile)
-
-      try {
-        const response = await fetch("http://localhost:5000/api/upload", {
-          method: "POST",
-          body: formData,
-        })
-
-        if (response.ok) {
-          const data = await response.json()
-          console.log("Files uploaded successfully:", data)
-          setFiles((prevFiles) => [...prevFiles, ...data.files])
-          setSelectedFile(null)
-        } else {
-          console.error("Failed to upload file")
-        }
-      } catch (error) {
-        console.error("Error uploading file:", error)
-      }
-    }
-  }
-
-  const openImageModal = (file: string) => {
-    const index = files.indexOf(file)
-    setSelectedImage(file)
-    setCurrentImageIndex(index)
-  }
-
-  const closeImageModal = () => {
-    setSelectedImage(null)
-    setCurrentImageIndex(null)
-  }
-
-  const nextImage = () => {
-    if (currentImageIndex !== null) {
-      const nextIndex = (currentImageIndex + 1) % files.length
-      setCurrentImageIndex(nextIndex)
-      setSelectedImage(files[nextIndex])
-    }
-  }
-
-  const prevImage = () => {
-    if (currentImageIndex !== null) {
-      const prevIndex = (currentImageIndex - 1 + files.length) % files.length
-      setCurrentImageIndex(prevIndex)
-      setSelectedImage(files[prevIndex])
-    }
-  }
 
   return (
-    <GalleryContainer>
-      <GalleryHeader
-        as={motion.div}
-        initial="hidden"
-        animate="visible"
-        variants={headerVariants}
-      >
-        <h2>Gallery</h2>
-        <p>Browse and upload your favorite images to share with others.</p>
-      </GalleryHeader>
-
-      <GalleryForm onSubmit={handleFileUpload}>
-        <input type="file" onChange={handleFileChange} accept="image/*" />
-        <button type="submit" disabled={!selectedFile}>
-          Upload File
-        </button>
-        {selectedFile && (
-          <div>
-            <h4>Selected File:</h4>
-            <img
-              src={URL.createObjectURL(selectedFile)}
-              alt="Selected file preview"
-              style={{ maxWidth: "100px", maxHeight: "100px" }}
-            />
-          </div>
-        )}
-      </GalleryForm>
-
-      <GalleryGrid>
-        {files.length === 0 ? (
-          <p>No images to display</p>
-        ) : (
-          files.map((file, index) => (
-            <GalleryItem key={index} onClick={() => openImageModal(file)}>
-              <img src={`http://localhost:5000/data/${file}`} alt={file} />
-            </GalleryItem>
-          ))
-        )}
-      </GalleryGrid>
-
-      {/* Modal for image preview */}
-      {selectedImage && (
-        <ModalOverlay onClick={closeImageModal}>
-          <ModalContent
-            onClick={(e: { stopPropagation: () => void }) =>
-              e.stopPropagation()
-            }
+    <GalleryContainer
+      initial="hidden"
+      animate="visible"
+      transition={{ duration: 0.8 }}
+    >
+      <GalleryHeading>Gallery</GalleryHeading>
+      <GalleryDescription>
+        Welcome to our service gallery! We are an authorized car dealer, proudly
+        presenting our wide range of vehicles. Explore our finest models and
+        find the perfect car for you!
+      </GalleryDescription>
+      <ImageGrid>
+        {images.map((src, index) => (
+          <ImageWrapper
+            key={index}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => setSelectedImage(src)}
           >
-            <PrevButton onClick={prevImage}>&#8592;</PrevButton>
-            <ModalImage
-              src={`http://localhost:5000/data/${selectedImage}`}
-              alt={selectedImage}
-            />
-            <NextButton onClick={nextImage}>&#8594;</NextButton>
-          </ModalContent>
-        </ModalOverlay>
-      )}
+            <img src={src} alt={`Gallery Image ${index + 1}`} />
+            <ImageOverlay whileHover={{ opacity: 1 }}>
+              <p>Car Image {index + 1}</p>
+            </ImageOverlay>
+          </ImageWrapper>
+        ))}
+      </ImageGrid>
+      <AnimatePresence>
+        {selectedImage && (
+          <Modal
+            onClick={() => setSelectedImage(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <ModalContent
+              onClick={(e: { stopPropagation: () => void }) =>
+                e.stopPropagation()
+              }
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+            >
+              <img src={selectedImage} alt="Enlarged" />
+              <CloseButton onClick={() => setSelectedImage(null)}>
+                &times;
+              </CloseButton>
+            </ModalContent>
+          </Modal>
+        )}
+      </AnimatePresence>
     </GalleryContainer>
   )
 }
