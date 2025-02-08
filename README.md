@@ -1,47 +1,137 @@
-# Getting Started with Create React App
+# Projekt: Duck Moto 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Logo aplikacji (jeśli masz)](src/assets/img/duck-logo.png)
 
-## Available Scripts
+## Opis
 
-In the project directory, you can run:
+**Cel aplikacji:**  
 
-### `npm start`
+Strona dealera samochodowego
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Struktura folderów
+```plaintext
+frontend-framework-project-main/
+├── public/
+│   ├── index.html
+│   ├── favicon.ico
+│   └── ...
+├── src/
+│   ├── api/
+│   │   ├── __pycache__/
+│   │   ├── app.py
+│   │   ├── auctionService.tsx
+│   │   ├── CarList.tsx
+│   │   ├── config.py
+│   │   ├── FileList.tsx
+│   │   ├── FileUploader.tsx
+│   │   ├── firebase.ts
+│   │   └── firebaseconfig.json
+│   ├── assets/
+│   │   ├── img/
+│   │   │   ├── pexels-images/
+│   │   │   ├── white-background/
+│   │   │   └── ... other pictures ...
+│   │   └── theme.ts
+│   ├── lib\Layout/  
+│   │   ├── components/
+│   │   │   ├── footer/
+│   │   │   │   ├── footerElements.ts
+│   │   │   │   └── index.tsx
+│   │   │   ├── nav/
+│   │   │   │   ├── navElements.ts
+│   │   │   │   └── index.tsx
+│   │   ├── index.tsx
+│   │   └── layoutElements.ts
+│   ├── pkg/
+│   │   └── index.tsx
+│   ├── views
+│   │   ├── addcar/
+│   │   │   │   ├── addcar.ts
+│   │   │   │   └── index.tsx
+│   │   ├── auctions/
+│   │   │   │   ├── AuctionDetails.ts
+│   │   │   │   ├── AuctionDetails.tsx
+│   │   │   │   ├── AuctionList.ts
+│   │   │   │   ├── AuctionList.tsx
+│   │   │   │   ├── Auction.ts
+│   │   │   │   ├── Auctions.tsx
+│   │   │   │   └── Filters.tsx
+│   │   ├── auth/
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── ProtectedRoute.tsx
+│   │   ├── Chat/
+│   │   │   │   ├── chatElemenets.ts
+│   │   │   │   └── index.tsx
+│   │   ├── gallery/
+│   │   │   │   ├── galleryElements.ts
+│   │   │   │   └── index.tsx
+│   │   ├── Home/
+│   │   │   │   ├── homeElements.ts
+│   │   │   │   └── index.tsx
+│   │   └── NotFound/
+│   │   │   │   ├── index.tsx
+│   │   │   │   └── notfoundElements.ts
+│   ├── App.css
+│   ├── App.test.tsx
+│   ├── App.tsx
+│   ├── AuthContext.tsx
+│   ├── index.tsx
+│   ├── react-app-end.d.ts
+│   ├── reportWebVitals.ts
+│   └── setupTests.ts
+├── .gitignore
+├── package.json
+├── README.md
+└── ...
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Zależności i konfiguracja projektu
 
-### `npm test`
+## Funkcjonalności
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Logowanie**  
+   Logowanie i rejestracja użytkowników.
 
-### `npm run build`
+2. **Aukcje**  
+   Dealer wystawia aukcje na sprzedaż, a klient (użytkownik) może dane do samochodów dostępnych do sprzedaży.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Galeria**  
+   Galeria zdjęć.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. **Chat**  
+   Możliwość prowadzenia rozmowy klienta w formie chatu z doradcami.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+5. **Informacje kontaktowe**  
+   Funkcja reklamowa i prezentacyjna firmy.
 
-### `npm run eject`
+## Instalacja
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Aby zainstalować i uruchomić aplikację lokalnie, wykonaj poniższe kroki:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Sklonuj repozytorium:
+    ```bash
+    git clone https://github.com/izalke/frontend-framework-project.git
+    ```
+2. Zainstaluj zależności:
+    ```bash
+    npm install
+    ```
+3. Jeśli nie masz python, zainstaluj go.
+4. Zainstaluj Flask
+    ```bash
+    pip install flask
+    ```
+5. Uruchom i jeśli pojawią się błędy doinstaluj potrzebne rzeczy:
+    ```bash
+    flask --app src/api/app.py run
+    ```
+6. Uruchom aplikację:
+    ```bash
+    npm start
+    ```
+    
+Aplikacja będzie dostępna pod adresem `http://localhost:3000`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+API będzie dostępna pod adresem `http://localhost:5000`.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 # frontend-framework-project
