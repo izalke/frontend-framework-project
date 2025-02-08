@@ -1,54 +1,53 @@
-import React, { useState } from "react"
-import { signIn, registerUser } from "../../api/firebase"
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signIn, registerUser } from "../../api/firebase";
+import { AuthContainer, AuthTitle, ErrorMessage, Input, AuthButton, ToggleText } from "./authElements";
 
 const Auth: React.FC = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [isRegister, setIsRegister] = useState(false)
-  const [error, setError] = useState("")
-  const navigate = useNavigate()
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [isRegister, setIsRegister] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
+  const navigate = useNavigate();
 
   const handleAuth = async () => {
     try {
-      setError("")
+      setError("");
       if (isRegister) {
-        await registerUser(email, password)
+        await registerUser(email, password);
       } else {
-        await signIn(email, password)
+        await signIn(email, password);
       }
-      navigate("/")
+      navigate("/");
     } catch (err) {
-      setError("Login error: " + (err as Error).message)
+      setError("Błąd logowania: " + (err as Error).message);
     }
-  }
+  };
 
   return (
-    <div className="auth-container">
-      <h2>{isRegister ? "Rejestracja" : "Logowanie"}</h2>
-      {error && <p className="error-message">{error}</p>}
-      <input
+    <AuthContainer initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <AuthTitle>{isRegister ? "Rejestracja" : "Logowanie"}</AuthTitle>
+      {error && <ErrorMessage>{error}</ErrorMessage>}
+      <Input
         type="email"
         placeholder="Adres e-mail"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
-      <input
+      <Input
         type="password"
         placeholder="Hasło"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleAuth}>
+      <AuthButton whileTap={{ scale: 0.95 }} onClick={handleAuth}>
         {isRegister ? "Zarejestruj" : "Zaloguj"}
-      </button>
-      <p onClick={() => setIsRegister(!isRegister)}>
-        {isRegister
-          ? "Masz już konto? Zaloguj się"
-          : "Nie masz konta? Zarejestruj się"}
-      </p>
-    </div>
-  )
-}
+      </AuthButton>
+      <ToggleText onClick={() => setIsRegister(!isRegister)}>
+        {isRegister ? "Masz już konto? Zaloguj się" : "Nie masz konta? Zarejestruj się"}
+      </ToggleText>
+    </AuthContainer>
+  );
+};
 
-export default Auth
+export default Auth;

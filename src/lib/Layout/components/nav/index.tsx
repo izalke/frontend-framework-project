@@ -15,6 +15,7 @@ import {
   MobileLink,
   SocialWrapper,
   MobileOverlay,
+  LogoutButton,
 } from "./navElements"
 
 const Nav = (): JSX.Element => {
@@ -101,21 +102,21 @@ const Nav = (): JSX.Element => {
           {user ? (
             <>
               <li>
-                <span className="username">
-                  👤 {user.displayName || user.email}
-                </span>
+                <span className="username">👤 {user.displayName || user.email}</span>
               </li>
               <li>
-                <button onClick={logout} className="logout-button">
-                  Logout
-                </button>
+                <LogoutButton onClick={logout}>Logout</LogoutButton>
               </li>
             </>
           ) : (
             <li>
-              <Link to={"/auth"}>Login / Sign in</Link>
+              <Link to="/auth">Login / Sign in</Link>
             </li>
           )}
+
+          {/* <li>
+            <Link to={"/contact"}>Contact</Link>
+          </li> */}
 
           {/* <li>
             <Link to={"/contact"}>Contact</Link>
