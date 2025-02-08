@@ -1,7 +1,15 @@
 import { useState } from "react"
 import { ref, get, child, set } from "firebase/database"
 import { db } from "../../api/firebase"
-import "./index.css"
+import {
+  Container,
+  Form,
+  Input,
+  Textarea,
+  Button,
+  Message,
+  Title,
+} from "./carElements"
 
 const AddCar = () => {
   const [formData, setFormData] = useState({
@@ -52,35 +60,6 @@ const AddCar = () => {
     }
   }
 
-  const handleFileUpload = async (auctionId: string) => {
-    if (!formData.images.length) return
-
-    for (const file of formData.images) {
-      const formDataUpload = new FormData()
-      formDataUpload.append("file", file)
-
-      try {
-        console.log(`Uploading file: ${file.name} to auction: ${auctionId}`)
-
-        const response = await fetch(
-          `http://localhost:5000/api/upload-auction/${auctionId}`,
-          {
-            method: "POST",
-            body: formDataUpload,
-          }
-        )
-
-        if (!response.ok) {
-          throw new Error(`Error uploading file: ${file.name}`)
-        }
-
-        console.log(`File ${file.name} uploaded OK.`)
-      } catch (error) {
-        console.error("Error uploading file:", error)
-      }
-    }
-  }
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setLoading(true)
@@ -89,11 +68,6 @@ const AddCar = () => {
     try {
       const auctionId = await getNextAuctionId()
       await set(ref(db, `auctions/${auctionId}`), { ...formData, images: [] })
-
-      await fetch(`http://localhost:5000/api/create-folder/${auctionId}`, {
-        method: "POST",
-      })
-      await handleFileUpload(auctionId)
 
       setMessage("Aukcja dodana pomyślnie!")
       setFormData({
@@ -117,108 +91,87 @@ const AddCar = () => {
   }
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-white shadow-md rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Dodaj nową aukcję</h2>
-      <form onSubmit={handleSubmit}>
-        <input
+    <Container>
+      <Title>Add new auction</Title>
+      <Form onSubmit={handleSubmit}>
+        <Input
           type="text"
           name="brand"
           placeholder="Marka"
           value={formData.brand}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-        <input
+        <Input
           type="text"
           name="title"
           placeholder="Tytuł"
           value={formData.title}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-        <input
+        <Input
           type="number"
           name="price"
           placeholder="Cena"
           value={formData.price}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-        <input
+        <Input
           type="number"
           name="capacity"
           placeholder="Pojemność silnika"
           value={formData.capacity}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-        <input
+        <Input
           type="number"
           name="power"
           placeholder="Moc (KM)"
           value={formData.power}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-        <input
+        <Input
           type="number"
           name="mileage"
           placeholder="Przebieg (km)"
           value={formData.mileage}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-        <input
+        <Input
           type="text"
           name="color"
           placeholder="Kolor"
           value={formData.color}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-        <input
+        <Input
           type="text"
           name="vin"
           placeholder="VIN"
           value={formData.vin}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-        <textarea
+        <Textarea
           name="description"
           placeholder="Opis"
           value={formData.description}
           onChange={handleChange}
           required
-          className="w-full p-2 border rounded mb-2"
         />
-
-        <input
-          type="file"
-          multiple
-          onChange={handleFileChange}
-          className="w-full p-2 border rounded mb-2"
-        />
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-500 text-white p-2 rounded mt-2"
-        >
+        <Input type="file" multiple onChange={handleFileChange} />
+        <Button type="submit" disabled={loading}>
           {loading ? "Dodawanie..." : "Dodaj Aukcję"}
-        </button>
-      </form>
-
-      {message && <p className="mt-4 text-center text-green-600">{message}</p>}
-    </div>
+        </Button>
+      </Form>
+      {message && <Message>{message}</Message>}
+    </Container>
   )
 }
 

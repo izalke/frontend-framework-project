@@ -5,15 +5,15 @@ import { ThemeProvider } from "styled-components"
 import theme from "./assets/theme"
 import "./App.css"
 import Layout from "./lib/Layout"
-import Gallery from "./views/gallery";
-import Auctions from "./views/auctions/Auctions";
-import AuctionDetails from "./views/auctions/AuctionDetails";
-import AddCar from "./views/addcar";
-import Chat from "./views/Chat";
-import Auth from "./views/auth";
-import { AuthProvider } from "./AuthContext";
-import ProtectedRoute from "./views/auth/ProtectedRoute";
-import UpdateAuction from "./views/auctions/UpdateAuction"
+import Gallery from "./views/Gallery"
+import Auctions from "./views/Auctions/Auctions"
+import AuctionDetails from "./views/Auctions/AuctionDetails"
+import AddCar from "./views/AddCar"
+import Chat from "./views/Chat"
+import Auth from "./views/Auth"
+import { AuthProvider } from "./AuthContext"
+import ProtectedRoute from "./views/Auth/ProtectedRoute"
+import UpdateAuction from "./views/Auctions/UpdateAuction"
 
 // views
 import Home from "./views/Home"
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
         path: "chat",
         element: <Chat />,
       },
-      
+
       // {
       //   path: "about",
       //   element: <About />,
@@ -85,8 +85,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-    <AuthProvider>
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
       </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>

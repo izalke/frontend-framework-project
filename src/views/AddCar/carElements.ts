@@ -4,14 +4,14 @@ export const Container = styled.div`
   padding: 1.5rem;
   max-width: 40rem;
   margin: 0 auto;
-  background-color: ${(props) => props.theme.antiflashWhite};
-  box-shadow: ${(props) => props.theme.shadow};
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
 `
 
 export const Title = styled.h2`
   text-align: center;
-  color: ${(props) => props.theme.yinmnGreen};
+  color: #333;
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -26,7 +26,7 @@ export const Form = styled.form`
 export const Input = styled.input`
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid ${(props) => props.theme.afterGrey};
+  border: 1px solid #ccc;
   border-radius: 0.25rem;
   font-size: 1rem;
 `
@@ -34,15 +34,15 @@ export const Input = styled.input`
 export const Textarea = styled.textarea`
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid ${(props) => props.theme.afterGrey};
+  border: 1px solid #ccc;
   border-radius: 0.25rem;
   font-size: 1rem;
   min-height: 5rem;
 `
 
 export const Button = styled.button`
-  background: ${(props) => props.theme.redGradient};
-  color: ${(props) => props.theme.antiflashWhite};
+  background-color: #007bff;
+  color: white;
   padding: 0.75rem;
   border: none;
   border-radius: 0.25rem;
@@ -52,11 +52,11 @@ export const Button = styled.button`
   transition: background 0.3s;
 
   &:hover {
-    background-color: ${(props) => props.theme.yinmnGreenAfter};
+    background-color: #0056b3;
   }
 
   &:disabled {
-    background-color: ${(props) => props.theme.afterGrey};
+    background-color: #ccc;
     cursor: not-allowed;
   }
 `
@@ -64,6 +64,6 @@ export const Button = styled.button`
 export const Message = styled.p`
   margin-top: 1rem;
   text-align: center;
-  color: ${(props) => props.theme.yinmnGreen};
+  color: green;
   font-size: 1rem;
 `
