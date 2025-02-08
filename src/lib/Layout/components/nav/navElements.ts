@@ -165,3 +165,19 @@ export const SocialWrapper = styled.div`
     }
   }
 `
+
+
+export const LogoutButton = styled.button`
+padding: 0.6rem 1rem;
+background-color: green;
+color: white;
+border: none;
+border-radius: 5px;
+font-size: 1rem;
+cursor: pointer;
+transition: background 0.3s ease;
+
+&:hover {
+  background-color: darkgreen;
+}
+`;
