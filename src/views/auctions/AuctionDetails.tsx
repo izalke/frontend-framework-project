@@ -81,11 +81,16 @@ const AuctionDetails: React.FC = () => {
         )}
       </div>
 
-      {role === "admin" && (
-        <button onClick={handleDelete} className="delete-button">
-          🗑 Usuń aukcję
-        </button>
-      )}
+      <button
+        onClick={() => navigate(`/update-auction/${id}`)}
+        className="edit-button"
+      >
+        ✏️ Edytuj aukcję
+      </button>
+
+      <button onClick={handleDelete} className="delete-button">
+        🗑 Usuń aukcję
+      </button>
 
       <Modal
         isOpen={isOpen}

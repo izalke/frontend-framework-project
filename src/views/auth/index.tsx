@@ -19,7 +19,7 @@ const Auth: React.FC = () => {
       }
       navigate("/")
     } catch (err) {
-      setError("Błąd logowania: " + (err as Error).message)
+      setError("Login error: " + (err as Error).message)
     }
   }
 
