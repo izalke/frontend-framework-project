@@ -4,10 +4,19 @@ import {
   listenForMessages,
   getUnreadMessagesCount,
 } from "../../api/firebase"
-import { getDatabase, ref, get, set, onValue } from "firebase/database"
+import { getDatabase, ref, get, set } from "firebase/database"
 import { useAuth } from "../../AuthContext"
 import { db } from "../../api/firebase"
-import "./index.css"
+import {
+  ChatContainer,
+  ChatMessages,
+  Message,
+  Sender,
+  ChatInputContainer,
+  ChatInput,
+  SendButton,
+  UserSelector,
+} from "./chatElemenets"
 
 const Chat: React.FC = () => {
   const { user, role } = useAuth()
@@ -66,8 +75,7 @@ const Chat: React.FC = () => {
 
   useEffect(() => {
     if (selectedUser) {
-      const unreadRef = ref(db, `chats/${selectedUser}/unread`)
-      set(unreadRef, 0)
+      set(ref(db, `chats/${selectedUser}/unread`), 0)
     }
   }, [selectedUser])
 
@@ -78,13 +86,13 @@ const Chat: React.FC = () => {
   }
 
   return (
-    <div className="chat-container">
+    <ChatContainer>
       <h2>
         {role === "admin" ? "Panel administracyjny czatu" : "Chat z doradcą"}
       </h2>
 
       {role === "admin" && (
-        <div className="user-selector">
+        <UserSelector>
           <label>Wybierz użytkownika:</label>
           <select
             value={selectedUser || ""}
@@ -98,40 +106,37 @@ const Chat: React.FC = () => {
               </option>
             ))}
           </select>
-        </div>
+        </UserSelector>
       )}
 
-      <div className="chat-messages">
+      <ChatMessages>
         {messages.map((msg) => {
           const isCurrentUser = msg.sender === user?.uid
           return (
-            <div
-              key={msg.id}
-              className={`message ${
-                isCurrentUser ? "my-message" : "other-message"
-              }`}
-            >
-              <span className="sender">
+            <Message key={msg.id} isCurrentUser={isCurrentUser}>
+              <Sender>
                 {isCurrentUser
                   ? user?.email
                   : users.find((u) => u.uid === msg.sender)?.email || "Doradca"}
-              </span>
+              </Sender>
               <p>{msg.text}</p>
-            </div>
+            </Message>
           )
         })}
-      </div>
+      </ChatMessages>
 
-      <div className="chat-input">
-        <input
+      <ChatInputContainer>
+        <ChatInput
           type="text"
           placeholder="Wpisz wiadomość..."
           value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          onChange={(e: { target: { value: React.SetStateAction<string> } }) =>
+            setNewMessage(e.target.value)
+          }
         />
-        <button onClick={handleSend}>Wyślij</button>
-      </div>
-    </div>
+        <SendButton onClick={handleSend}>Wyślij</SendButton>
+      </ChatInputContainer>
+    </ChatContainer>
   )
 }
 

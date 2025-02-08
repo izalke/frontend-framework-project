@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { signIn, registerUser } from "../../api/firebase"
 import { useNavigate } from "react-router-dom"
-import "./index.css"
 
 const Auth: React.FC = () => {
   const [email, setEmail] = useState("")

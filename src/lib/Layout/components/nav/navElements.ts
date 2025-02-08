@@ -25,8 +25,6 @@ export const Bar = styled.div`
   }
 `
 
-
-
 export const Logo = styled.img`
   width: 120px;
   height: auto;

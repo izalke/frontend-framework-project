@@ -1,3 +1,4 @@
+import React from "react"
 import {
   Container,
   FooterSection,
@@ -13,6 +14,7 @@ import logo from "../../../../assets/img/duck-logo.png"
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+
   return (
     <>
       <FooterSection>
@@ -21,59 +23,49 @@ const Footer = () => {
             <Logo>
               <img
                 style={{
-                  display: "block",
+                  display: "flex",
                   height: "80px",
                   width: "auto",
+                  textAlign: "left",
                   position: "relative",
                   right: "13px",
                 }}
                 src={logo}
-                alt=""
+                alt="Aprest Automotive Logo"
               />
-              <h2>lorem</h2>
+              <h2>Driven by Passion, Fueled by Innovation</h2>
               <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque
-                excepturi animi minima est sit illo vel ex molestias quis nam,
-                alias veritatis cupiditate quam blanditiis veniam! Quod quaerat
-                molestias atque.
+                At Duck Moto we provide premium solutions for car enthusiasts
+                and professionals alike. From high-performance parts to expert
+                maintenance tips, we are your trusted partner in the world of
+                automobiles.
               </p>
             </Logo>
           </Box>
           <Lista>
             <ul>
-              <h3>Lorem</h3>
-              <li>Lorem</li>
-              <li>Lorem</li>
-              <li>Lorem</li>
+              <h3>Company Information</h3>
+              <li>NIP: 123456789</li>
+              <li>31-553 Kraków</li>
+              <li>Krakowska 1892</li>
             </ul>
           </Lista>
-        </Container>
-        <Container>
           <Lista>
-            <ol>
-              <h3>Social Media</h3>
+            <ul>
+              <h3>Contact Us</h3>
               <li>
-                <a target={"_blank"} href={"https://www.facebook.com"}>
-                  <FacebookIcon />
-                </a>
+                <a href="tel:48123456789">+48 123 456 789</a>
               </li>
               <li>
-                <a target={"_blank"} href={"https://instagram.com"}>
-                  <InstagramIcon />
-                </a>
+                <a href="mailto:test@email.com">test@email.com</a>
               </li>
-              <li>
-                <a target={"_blank"} href={"https://www.youtube.com"}>
-                  <YoutubeIcon />
-                </a>
-              </li>
-            </ol>
+            </ul>
           </Lista>
         </Container>
       </FooterSection>
 
       <CopyRight>
-        <span>Copyright © {currentYear} MOTODUCK</span>
+        <span>Copyright © {currentYear} Moto Duck</span>
       </CopyRight>
     </>
   )

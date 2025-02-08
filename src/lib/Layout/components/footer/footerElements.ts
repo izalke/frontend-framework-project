@@ -6,19 +6,21 @@ export const FooterContact = styled.div`
 
   & p,
   h2 {
-    color: ${({ theme }) => theme.whiteOnly};
+    color: ${({ theme }) => theme.yinmnGreen};
   }
 
   & h2 {
     line-height: 1.3;
     margin-bottom: 15px;
     font-size: 2.2rem;
+    color: ${({ theme }) => theme.yinmnGreen};
   }
 
   & p {
     font-size: 1.1rem;
     line-height: 1.7;
     text-align: justify;
+    color: ${({ theme }) => theme.yinmnGreen};
   }
 `
 
@@ -38,17 +40,15 @@ export const Container = styled.div`
 export const Box = styled.div`
   & ul {
     display: block;
-    color: grey;
+    color: ${({ theme }) => theme.yinmnGreen};
     margin-bottom: 20px;
-    color: ${({ theme }) => theme.whiteOnly};
     text-decoration: none;
   }
 
   & li {
     display: block;
-    color: grey;
+    color: ${({ theme }) => theme.yinmnGreen};
     margin-bottom: 20px;
-    color: ${({ theme }) => theme.whiteOnly};
     text-decoration: none;
   }
 `
@@ -56,48 +56,40 @@ export const Box = styled.div`
 export const Lista = styled.div`
   & ul {
     display: block;
-    color: grey;
+    color: ${({ theme }) => theme.yinmnGreen};
     margin-bottom: 20px;
-    color: ${({ theme }) => theme.whiteOnly};
     text-decoration: none;
   }
 
   & li {
     display: block;
-    color: grey;
+    color: ${({ theme }) => theme.yinmnGreen};
     margin-bottom: 20px;
-    color: ${({ theme }) => theme.whiteOnly};
     text-decoration: none;
 
     & a {
-      color: ${({ theme }) => theme.whiteOnly};
+      color: ${({ theme }) => theme.yinmnGreen};
       text-align: left;
       display: block;
       transition: color 0.3s ease-in-out;
-
-      &:hover {
-        color: #c0a36a;
-      }
     }
   }
 
   & ol {
     display: inline-block;
-    color: grey;
+    color: ${({ theme }) => theme.yinmnGreen};
     margin-bottom: 20px;
-    color: ${({ theme }) => theme.whiteOnly};
     text-decoration: none;
 
     & > li {
       display: inline-block;
-      color: grey;
-      color: ${({ theme }) => theme.whiteOnly};
+      color: ${({ theme }) => theme.yinmnGreen};
       text-decoration: none;
     }
   }
 `
 export const FlexSan = styled.div`
-  background-color: ${({ theme }) => theme.yinmnGreen};
+  background-color: #c0a36a;
   margin-inline: auto;
   margin-bottom: 30px;
   width: 100%;
@@ -110,11 +102,11 @@ export const FlexSan = styled.div`
     flex: 0;
     display: inline-block;
     text-decoration: none;
-    color: #c0a36a;
-    border: 1px solid ${({ theme }) => theme.whiteOnly};
+    color: ${({ theme }) => theme.yinmnGreen};
+    border: 1px solid #fff;
     padding: 12px 60px;
     font-size: 13px;
-    background: ${({ theme }) => theme.whiteOnly};
+    background: #fff;
     position: relative;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
@@ -123,17 +115,17 @@ export const FlexSan = styled.div`
   }
 
   & a:hover {
-    color: ${({ theme }) => theme.whiteOnly};
-    border: 1px solid ${({ theme }) => theme.whiteOnly};
+    color: ${({ theme }) => theme.yinmnGreen};
+    border: 1px solid #fff;
     background: transparent;
     cursor: pointer;
   }
 `
 
 export const FooterSection = styled.div`
-  background-color: ${({ theme }) => theme.yinmnGreen};
+  background-color: #0f0f0f;
   padding: 50px 0;
-  color: ${({ theme }) => theme.whiteOnly};
+  color: ${({ theme }) => theme.yinmnGreen};
 
   & p {
     color: grey;
@@ -141,7 +133,7 @@ export const FooterSection = styled.div`
   }
 
   & input {
-    background-color: ${({ theme }) => theme.whiteOnly};
+    background-color: #fff;
     padding: 17px;
     width: 100%;
     border-radius: 5px;
@@ -150,7 +142,7 @@ export const FooterSection = styled.div`
   & h3 {
     font-weight: 500;
     margin-bottom: 30px;
-    color: ${({ theme }) => theme.whiteOnly};
+    color: ${({ theme }) => theme.yinmnGreen};
   }
 
   & ul {
@@ -166,7 +158,7 @@ export const FooterSection = styled.div`
 
 export const Logo = styled.div`
   & h2 {
-    color: ${({ theme }) => theme.whiteOnly};
+    color: #fff;
     font-weight: 500;
   }
 `
@@ -174,7 +166,8 @@ export const Logo = styled.div`
 export const CopyRight = styled.div`
   text-align: center;
   padding: 20px;
-  background-color: ${({ theme }) => theme.yinmnGreen};
+  background-color: #0f0f0f;
+  color: rgba(255, 255, 255, 0.5);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   & a {
     text-decoration: none;
@@ -190,11 +183,7 @@ export const CopyRight = styled.div`
 const socialIcon = `
   font-size: 2rem;
   margin: 0 .5rem;
-
-  &:hover {
-    & > path {
-      fill: #c0a36a;
-    }
+  
   }
 `
 
@@ -208,4 +197,20 @@ export const InstagramIcon = styled(FaInstagram)`
 
 export const YoutubeIcon = styled(FaYoutube)`
   ${socialIcon}
+`
+export const Designed = styled.div`
+  text-align: center;
+  padding: 20px;
+  background-color: #0f0f0f;
+  color: rgba(255, 255, 255, 0.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  & a {
+    text-decoration: none;
+  }
+
+  @media screen and (max-width: 800px) {
+    footer .container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
 `

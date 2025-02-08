@@ -9,7 +9,7 @@ import Gallery from "./views/gallery";
 import Auctions from "./views/auctions/Auctions";
 import AuctionDetails from "./views/auctions/AuctionDetails";
 import AddCar from "./views/addcar";
-import Chat from "./views/chat";
+import Chat from "./views/Chat";
 import Auth from "./views/auth";
 import { AuthProvider } from "./AuthContext";
 import ProtectedRoute from "./views/auth/ProtectedRoute";

@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { FaLinkedin, FaFacebookSquare, FaYoutube } from "react-icons/fa"
 import logo from "../../../../assets/img/duck-logo.png"
-import { useAuth } from "../../../../AuthContext";
-import { getTotalUnreadMessages } from "../../../../api/firebase";
+import { useAuth } from "../../../../AuthContext"
+import { getTotalUnreadMessages } from "../../../../api/firebase"
 import {
   Wrapper,
   Bar,
@@ -19,17 +19,17 @@ import {
 
 const Nav = (): JSX.Element => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false)
-  const { user, role, logout } = useAuth();
+  const { user, role, logout } = useAuth()
   const toggleDrawer = (): void => {
     setIsDrawerOpen((prev) => !prev)
   }
 
-  const [unreadCount, setUnreadCount] = useState(0);
+  const [unreadCount, setUnreadCount] = useState(0)
   useEffect(() => {
     if (user) {
-      getTotalUnreadMessages(user.uid, role === "admin").then(setUnreadCount);
+      getTotalUnreadMessages(user.uid, role === "admin").then(setUnreadCount)
     }
-  }, [user, role]);
+  }, [user, role])
 
   useEffect(() => {
     document.body.style.overflow = isDrawerOpen ? "hidden" : "auto"
@@ -70,12 +70,12 @@ const Nav = (): JSX.Element => {
           <li>
             <Link to={"/"}>Home</Link>
           </li>
-          <li>
+          {/* <li>
             <Link to={"/about"}>About</Link>
-          </li>
-          <li>
+          </li> */}
+          {/* <li>
             <Link to={"/ourservices"}>Our Services</Link>
-          </li>
+          </li> */}
           <li>
             <Link to={"/gallery"}>Gallery</Link>
           </li>
@@ -90,16 +90,20 @@ const Nav = (): JSX.Element => {
           )}
 
           <li>
-          <Link to="/chat" className="chat-link">
-            Chat {unreadCount > 0 && <span className="notification">{unreadCount}</span>}
-          </Link>
+            <Link to="/chat" className="chat-link">
+              Chat{" "}
+              {unreadCount > 0 && (
+                <span className="notification">{unreadCount}</span>
+              )}
+            </Link>
           </li>
-
 
           {user ? (
             <>
               <li>
-                <span className="username">👤 {user.displayName || user.email}</span>
+                <span className="username">
+                  👤 {user.displayName || user.email}
+                </span>
               </li>
               <li>
                 <button onClick={logout} className="logout-button">
@@ -113,11 +117,9 @@ const Nav = (): JSX.Element => {
             </li>
           )}
 
-
-
-          <li>
+          {/* <li>
             <Link to={"/contact"}>Contact</Link>
-          </li>
+          </li> */}
         </Links>
         <BurgerMenu isActive={isDrawerOpen} onClick={toggleDrawer}>
           <span />

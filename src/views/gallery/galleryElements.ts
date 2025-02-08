@@ -10,7 +10,7 @@ export const GalleryHeading = styled.h2`
   font-size: 2rem;
   color: ${({ theme }) => theme.yinmnGreen};
   margin-bottom: 1rem;
-  margin-top: 4rem;
+  margin-top: 5.5rem;
   position: relative;
 
   &::after {
