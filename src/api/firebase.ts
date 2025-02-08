@@ -161,7 +161,7 @@ const createChat = async (userId: string, adminId: string) => {
 const sendMessage = async (chatId: string, text: string) => {
   try {
     const user = auth.currentUser
-    if (!user) throw new Error("Musisz być zalogowany, aby wysyłać wiadomości.")
+    if (!user) throw new Error("You need to be log in to send messages.")
 
     const messageRef = push(ref(db, `chats/${chatId}/messages`))
     await set(messageRef, {

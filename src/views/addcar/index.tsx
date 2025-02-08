@@ -60,7 +60,7 @@ const AddCar = () => {
       formDataUpload.append("file", file)
 
       try {
-        console.log(`Przesyłanie pliku: ${file.name} do aukcji: ${auctionId}`)
+        console.log(`Uploading file: ${file.name} to auction: ${auctionId}`)
 
         const response = await fetch(
           `http://localhost:5000/api/upload-auction/${auctionId}`,
@@ -71,10 +71,10 @@ const AddCar = () => {
         )
 
         if (!response.ok) {
-          throw new Error(`Błąd przesyłania zdjęcia: ${file.name}`)
+          throw new Error(`Error uploading file: ${file.name}`)
         }
 
-        console.log(`Plik ${file.name} przesłany pomyślnie.`)
+        console.log(`File ${file.name} uploaded OK.`)
       } catch (error) {
         console.error("Error uploading file:", error)
       }

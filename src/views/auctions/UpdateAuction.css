@@ -1,0 +1,152 @@
+.update-auction {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.update-auction h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.update-auction label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.update-auction input,
+.update-auction textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.update-auction textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.update-auction button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.update-auction .save-button {
+    background: #28a745;
+    color: white;
+}
+
+.update-auction .save-button:hover {
+    background: #218838;
+}
+
+.update-auction .cancel-button {
+    background: #dc3545;
+    color: white;
+}
+
+.update-auction .cancel-button:hover {
+    background: #c82333;
+}
+
+.update-auction .auction-images {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.update-auction .image-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.update-auction .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.update-auction .delete-image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.update-auction .delete-image:hover {
+    background: rgba(255, 0, 0, 1);
+}
+
+.update-auction .file-upload-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.update-auction input[type="file"] {
+    display: block;
+    margin: 10px auto;
+}
+
+.update-auction .upload-button {
+    background: #007bff;
+    color: white;
+}
+
+.update-auction .upload-button:hover {
+    background: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .update-auction {
+        max-width: 90%;
+        padding: 15px;
+    }
+
+    .update-auction .image-container {
+        width: 80px;
+        height: 80px;
+    }
+
+    .update-auction input,
+    .update-auction textarea {
+        font-size: 14px;
+    }
+
+    .update-auction button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}

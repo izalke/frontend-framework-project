@@ -17,10 +17,10 @@ const CarList: React.FC = () => {
         }))
         setCars(carsArray)
       } else {
-        console.log("Brak danych!")
+        console.log("No data!")
       }
     } catch (error) {
-      console.error("Błąd pobierania danych:", error)
+      console.error("Error while downloading data:", error)
     }
   }
 
