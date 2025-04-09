@@ -133,5 +133,3 @@ Aby zainstalować i uruchomić aplikację lokalnie, wykonaj poniższe kroki:
 Aplikacja będzie dostępna pod adresem `http://localhost:3000`.
 
 API będzie dostępna pod adresem `http://localhost:5000`.
-
-# frontend-framework-project
