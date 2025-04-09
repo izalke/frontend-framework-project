@@ -1,6 +1,6 @@
 # Projekt: Duck Moto 
 
-![Logo aplikacji (jeśli masz)](src/assets/img/duck-logo.png)
+<img src="src/assets/img/duck-logo.png" alt="Logo aplikacji" style="width:150px;"/>
 
 ## Opis
 
